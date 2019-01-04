@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.quiz.InputQuiz"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="pertanyaan"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_weight="1.7"
+            android:background="#dfe6e9"
+            android:hint="masukan pertanyaan"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLines="5"
+            tools:ignore="Autofill" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="jawaban A"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/Jawaban_A"
+            android:inputType="text"
+            android:maxLength="10"
+            tools:ignore="Autofill"
+            android:background="#dfe6e9"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="jawaban B"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/Jawabanb"
+            android:inputType="text"
+            android:maxLength="10"
+            tools:ignore="Autofill"
+            android:background="#dfe6e9"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="jawaban C"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/Jawaban_C"
+            android:inputType="text"
+            android:maxLength="10"
+            tools:ignore="Autofill"
+            android:background="#dfe6e9"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="jawaban D"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/Jawaband"
+            android:inputType="text"
+            android:maxLength="10"
+            tools:ignore="Autofill"
+            android:background="#dfe6e9"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="jawaban E"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/Jawaban_E"
+            android:inputType="text"
+            android:maxLength="10"
+            tools:ignore="Autofill"
+            android:background="#dfe6e9"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:text="@string/jawaban_benar"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/input_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="simpan"
+            />
+    </LinearLayout>
+
+</LinearLayout>

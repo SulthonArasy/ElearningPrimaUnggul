@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.about.AboutActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/pu"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#dfe6e9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="M-learning ini di buat oleh alumni SMK PRIMA UNGGUL Angkatan 2015."
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#dfe6e9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="30dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Sulthonudin Arasy
+Universitas Budi luhur"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/sulthon" />
+    </LinearLayout>
+
+</LinearLayout>
