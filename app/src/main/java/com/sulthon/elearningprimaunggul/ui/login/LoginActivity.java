@@ -27,14 +27,15 @@ public class LoginActivity extends AppCompatActivity {
     private String contohPassword = "zxcvb";
     private Boolean guruSiswa = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        NisSiswa = (EditText) findViewById(R.id.edt_nis);
-        passwordText = (EditText) findViewById(R.id.edt_password);
+        Toast.makeText(this, "Selamat Datang di Aplikasi E-Learning Prima Unggul", Toast.LENGTH_LONG).show();
+
+        NisSiswa = findViewById(R.id.edt_nis);
+        passwordText = findViewById(R.id.edt_password);
         Button btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         final TextView txtNis = findViewById(R.id.txt_nis);
-        final EditText edtNis = findViewById(R.id.edt_nis);
 
         txtGuru = findViewById(R.id.txt_guru);
         txtGuru.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 txtGuru.setBackgroundColor(Color.GREEN);
                 txtGuru.setTextColor(Color.WHITE);
                 txtNis.setText(R.string.NIGy);
-                edtNis.setHint("NIG");
+                NisSiswa.setHint("NIG");
                 txtSiswa.setBackgroundColor(Color.GRAY);
                 txtSiswa.setTextColor(Color.BLACK);
 
@@ -78,14 +78,14 @@ public class LoginActivity extends AppCompatActivity {
                 txtSiswa.setBackgroundColor(Color.GREEN);
                 txtSiswa.setTextColor(Color.WHITE);
                 txtNis.setText(R.string.nisy);
-                edtNis.setHint(R.string.nisy);
+                NisSiswa.setHint(R.string.nisy);
                 txtGuru.setBackgroundColor(Color.GRAY);
                 txtGuru.setTextColor(Color.BLACK);
             }
         });
 
         txtNis.setText(R.string.NIGy);
-        edtNis.setHint(R.string.NIGy);
+        NisSiswa.setHint(R.string.NIGy);
 
         Button btnAbout = findViewById(R.id.btn_about);
         btnAbout.setOnClickListener(new View.OnClickListener() {
