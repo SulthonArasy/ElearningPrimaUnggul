@@ -2,6 +2,7 @@ package com.sulthon.elearningprimaunggul.ui.pelajaran;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,36 +11,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.PelajaranItem;
 import com.sulthon.elearningprimaunggul.ui.materi.ActivityListMateri;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.PelajaranActivityViewHolder> {
 
-    private ArrayList<Pelajaran> dataList;
+    private List<PelajaranItem> dataList;
     private Context context;
 
-    public PelajaranAdapter(Context context, ArrayList<Pelajaran> dataList) {
+    PelajaranAdapter(Context context, List<PelajaranItem> dataList) {
         this.dataList = dataList;
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public PelajaranActivityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PelajaranActivityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.row_pelajaran, parent, false);
         return new PelajaranActivityViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(PelajaranActivityViewHolder holder, int position) {
-        holder.txtNama.setText(dataList.get(position).getNamaPelajaran());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context,ActivityListMateri.class));
-            }
-        });
+    public void onBindViewHolder(@NonNull PelajaranActivityViewHolder holder, int position) {
+        holder.txtNama.setText(dataList.get(position).getNama());
     }
 
     @Override
@@ -47,15 +45,21 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
         return (dataList != null) ? dataList.size() : 0;
     }
 
-    public class PelajaranActivityViewHolder extends RecyclerView.ViewHolder{
+    class PelajaranActivityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtNama;
         private CardView cardView;
 
-        public PelajaranActivityViewHolder(View itemView) {
+        PelajaranActivityViewHolder(View itemView) {
             super(itemView);
-            txtNama = (TextView) itemView.findViewById(R.id.txt_nama_Pelajaran);
+            txtNama = itemView.findViewById(R.id.txt_nama_Pelajaran);
             cardView = itemView.findViewById(R.id.cardview);
+
+            cardView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context, ActivityListMateri.class));
+        }
     }
 }

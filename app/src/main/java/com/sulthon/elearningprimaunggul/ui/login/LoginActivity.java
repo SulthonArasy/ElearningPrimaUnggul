@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.data.api.LoginGuruResponse;
+import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;

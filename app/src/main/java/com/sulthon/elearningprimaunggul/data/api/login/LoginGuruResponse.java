@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul.data.api;
+package com.sulthon.elearningprimaunggul.data.api.login;
 
 import android.support.annotation.NonNull;
 
