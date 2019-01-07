@@ -38,7 +38,8 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
-        android:background="#FF969696" />
+        android:background="#FF969696"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:layout_width="match_parent"
@@ -116,9 +117,9 @@
         android:gravity="bottom">
 
         <Button
-            android:id="@+id/btn_buat_materi"
+            android:id="@+id/btn_buat_pelajaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buat_materi_baru" />
+            android:text="buat pelajaran baru" />
     </LinearLayout>
 </LinearLayout>

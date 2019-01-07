@@ -8,7 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface APIRepository {
-    @POST("api/login-test.php")
+    @POST("api/login-guru.php")
     Call<LoginResponse> login(@Body LoginBody body);
 
 }

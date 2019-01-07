@@ -43,8 +43,8 @@ public class PelajaranActivity extends AppCompatActivity {
             }
         });*/
 
-        Button btnBuatMateri = findViewById(R.id.btn_buat_materi);
-        btnBuatMateri.setOnClickListener(new View.OnClickListener() {
+        Button btnBuatPelajaran = findViewById(R.id.btn_buat_pelajaran);
+        btnBuatPelajaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new TedPermission(PelajaranActivity.this)

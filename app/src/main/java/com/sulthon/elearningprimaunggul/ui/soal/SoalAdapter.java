@@ -31,6 +31,10 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.SoalViewHolder
     public void onBindViewHolder(SoalViewHolder holder, int position) {
         holder.txtPertanyaan.setText(dataList.get(position).getPertanyaan());
         holder.rgJawaban.setText(dataList.get(position).getJawaban());
+        holder.rgJawaban.setText(dataList.get(position).getJawaban());
+        holder.rgJawaban.setText(dataList.get(position).getJawaban());
+        holder.rgJawaban.setText(dataList.get(position).getJawaban());
+        holder.rgJawaban.setText(dataList.get(position).getJawaban());
 
     }
 
@@ -45,6 +49,10 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.SoalViewHolder
         public SoalViewHolder(View itemView) {
             super(itemView);
             txtPertanyaan = (TextView) itemView.findViewById(R.id.txt_pertanyaan);
+            rgJawaban = (RadioButton) itemView.findViewById(R.id.rg_jawaban);
+            rgJawaban = (RadioButton) itemView.findViewById(R.id.rg_jawaban);
+            rgJawaban = (RadioButton) itemView.findViewById(R.id.rg_jawaban);
+            rgJawaban = (RadioButton) itemView.findViewById(R.id.rg_jawaban);
             rgJawaban = (RadioButton) itemView.findViewById(R.id.rg_jawaban);
         }
     }

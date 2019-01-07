@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.ui.quiz.ActivityQuiz;
 import com.sulthon.elearningprimaunggul.ui.quiz.InputQuiz;
+import com.sulthon.elearningprimaunggul.ui.soal.SoalActivity;
 
 public class ViewMateriActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class ViewMateriActivity extends AppCompatActivity {
         btnKuis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewMateriActivity.this, ActivityQuiz.class));
+                startActivity(new Intent(ViewMateriActivity.this, InputQuiz.class));
             }
         });
 
@@ -29,7 +30,7 @@ public class ViewMateriActivity extends AppCompatActivity {
         TxtQuis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity((new Intent(ViewMateriActivity.this, InputQuiz.class)));
+                startActivity((new Intent(ViewMateriActivity.this, SoalActivity.class)));
             }
         });
 

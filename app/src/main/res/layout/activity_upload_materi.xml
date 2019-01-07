@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/subject"
+            android:text="Materi"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:hint="@string/subject"
+            android:hint="Materi"
             android:inputType="text"
             android:maxLength="10"
             tools:ignore="Autofill"
@@ -103,6 +103,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
@@ -112,13 +113,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/file"
+            android:textSize="20dp"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_choose_image"
             android:src="@drawable/upload"
-            android:layout_width="50dp"
+            android:layout_width="90dp"
+            android:background="#FFFF8080"
             android:layout_height="50dp"
             android:text="Upload"/>
 

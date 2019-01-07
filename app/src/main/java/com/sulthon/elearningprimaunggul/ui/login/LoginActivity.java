@@ -1,5 +1,6 @@
 package com.sulthon.elearningprimaunggul.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,21 +11,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
 import com.sulthon.elearningprimaunggul.R;
+import com.sulthon.elearningprimaunggul.data.api.LoginResponse;
+import com.sulthon.elearningprimaunggul.data.body.LoginBody;
+import com.sulthon.elearningprimaunggul.service.APIRepository;
+import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
 import com.sulthon.elearningprimaunggul.ui.pelajaran.PelajaranActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private EditText NisSiswa, passwordText;
+    private EditText NisSiswa, PasswordText;
     private Button loginButton;
     private TextView txtGuru;
     private TextView txtSiswa;
-    private String contohNis = "12345";
-    private String contohPassword = "zxcvb";
     private Boolean guruSiswa = false;
 
     @Override
@@ -35,21 +43,22 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, "Selamat Datang di Aplikasi E-Learning Prima Unggul", Toast.LENGTH_LONG).show();
 
         NisSiswa = findViewById(R.id.edt_nis);
-        passwordText = findViewById(R.id.edt_password);
+        PasswordText = findViewById(R.id.edt_password);
         Button btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ambilData(NisSiswa.getText().toString(),PasswordText.getText().toString());
 
                 if (guruSiswa) {
-                    startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+                    ambilData(NisSiswa.getText().toString(),PasswordText.getText().toString());
                 } else {
                     Toast.makeText(LoginActivity.this, "Anda Bukan Siswa", Toast.LENGTH_SHORT).show();
                 }
-//                login();
-                /*ambilData();*/
+                //login();
             }
         });
+
 
         final TextView txtNis = findViewById(R.id.txt_nis);
 
@@ -57,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         txtGuru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guruSiswa = false;
+                guruSiswa = true;
                 txtGuru.setBackgroundColor(Color.GREEN);
                 txtGuru.setTextColor(Color.WHITE);
                 txtNis.setText(R.string.NIGy);
@@ -74,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         txtSiswa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guruSiswa = true;
+                guruSiswa = false;
                 txtSiswa.setBackgroundColor(Color.GREEN);
                 txtSiswa.setTextColor(Color.WHITE);
                 txtNis.setText(R.string.nisy);
@@ -111,9 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String Nis = NisSiswa.getText().toString();
-        String password = passwordText.getText().toString();
-
         // TODO: Implement your own authentication logic here.
 
         new android.os.Handler().postDelayed(
@@ -125,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
-    }*/
+    }
 
 
     @Override
@@ -161,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean valid = true;
 
         String Nis = NisSiswa.getText().toString();
-        String password = passwordText.getText().toString();
+        String password = PasswordText.getText().toString();
 
         if (Nis.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(Nis).matches()) {
             NisSiswa.setError("enter a valid email address");
@@ -171,17 +177,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            passwordText.setError("between 4 and 10 alphanumeric characters");
+            PasswordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
-            passwordText.setError(null);
+            PasswordText.setError(null);
         }
 
         return valid;
     }
 
-}
-    /*public static SharedPreferences getSharedPreferences(Context context){
+
+    public static SharedPreferences getSharedPreferences(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
     public class Preferen {
@@ -204,23 +210,24 @@ public class LoginActivity extends AppCompatActivity {
     }*/
 
 
-    /*private void ambilData() {
+    private void ambilData(String user, String password) {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
         dialog.setMessage("Tunggu Sebentar....");
         dialog.show();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://180.243.162.99/")
+                .baseUrl("http://abangcoding.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APIRepository service = retrofit.create(APIRepository.class);
-        LoginBody body = new LoginBody("1","1");
+        LoginBody body = new LoginBody(user, password);
         Call<LoginResponse> result = service.login(body);
 
         result.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 dialog.dismiss();
+                startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
                 Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_LONG).show();
 
             }
@@ -232,5 +239,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Error gan..", Toast.LENGTH_SHORT).show();
 
             }
-        });*/
+        });
+    }
+}
 
