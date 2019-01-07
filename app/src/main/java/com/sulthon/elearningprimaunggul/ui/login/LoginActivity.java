@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.LoginGuruResponse;
+import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
 import com.sulthon.elearningprimaunggul.ui.pelajaran.PelajaranActivity;
@@ -38,11 +39,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog loading;
     private TextView txtUser;
     private EditText edtPass;
+    private SharedPrefLogin session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        session = new SharedPrefLogin(this);
 
         edtUser = findViewById(R.id.edt_user);
         edtPass = findViewById(R.id.edt_password);
@@ -51,6 +55,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtGuru = findViewById(R.id.txt_guru);
         txtSiswa = findViewById(R.id.txt_siswa);
         txtUser = findViewById(R.id.txt_user);
+
+        if (session.isLoggedIn()){
+            startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+            finish();
+            return;
+        }
 
         // pertama kali activity terbuat akan langsung set sebagai guru
         isSiswa = false;
@@ -86,6 +96,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loading.dismiss();
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
+                LoginGuruResponse data = response.body();
+                session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken());
+
                 Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
                 finish();
