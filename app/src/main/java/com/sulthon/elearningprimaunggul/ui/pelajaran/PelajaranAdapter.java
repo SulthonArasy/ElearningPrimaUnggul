@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.data.api.pelajaran.PelajaranItem;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranItem;
 import com.sulthon.elearningprimaunggul.ui.materi.ActivityListMateri;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.PelajaranActivityViewHolder> {

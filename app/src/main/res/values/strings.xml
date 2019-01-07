@@ -40,4 +40,5 @@
     <string name="go_to_permissions_settings">Go to App settings and enable permissions</string>
     <string name="quiz">Quiz</string>
     <string name="buat_pelajaran_baru">Buat pelajaran baru</string>
+    <string name="materi">Materi</string>
 </resources>

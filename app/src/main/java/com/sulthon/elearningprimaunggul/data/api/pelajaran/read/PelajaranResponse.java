@@ -1,4 +1,6 @@
-package com.sulthon.elearningprimaunggul.data.api.pelajaran;
+package com.sulthon.elearningprimaunggul.data.api.pelajaran.read;
+
+import android.support.annotation.NonNull;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
@@ -38,6 +40,7 @@ public class PelajaranResponse{
 		return pelajaran;
 	}
 
+	@NonNull
 	@Override
  	public String toString(){
 		return 

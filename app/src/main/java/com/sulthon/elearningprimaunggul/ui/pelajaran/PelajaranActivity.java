@@ -1,15 +1,18 @@
 package com.sulthon.elearningprimaunggul.ui.pelajaran;
 
 import android.Manifest;
-import android.content.Intent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +21,10 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.data.api.pelajaran.PelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
-import com.sulthon.elearningprimaunggul.ui.uploadmateri.UploadMateriActivity;
 
 import java.util.ArrayList;
 
@@ -31,10 +34,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PelajaranActivity extends AppCompatActivity implements View.OnClickListener, Callback<PelajaranResponse>, SwipeRefreshLayout.OnRefreshListener {
+public class PelajaranActivity extends AppCompatActivity implements View.OnClickListener,
+        Callback<PelajaranResponse>, SwipeRefreshLayout.OnRefreshListener {
     private SharedPrefLogin session;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
+    private Gson gson = new Gson();
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://abangcoding.com/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build();
+    private APIRepository service = retrofit.create(APIRepository.class);
+    private String nig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_list_pelajaran);
 
         session = new SharedPrefLogin(this);
+        nig = session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER);
 
         Button btnBuatPelajaran = findViewById(R.id.btn_buat_pelajaran);
         TextView txtLogOut = findViewById(R.id.txt_log_out);
@@ -49,7 +61,6 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         recyclerView = findViewById(R.id.recycler_pelajaran);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        refreshLayout.setRefreshing(true);
         onRefresh();
 
         btnBuatPelajaran.setOnClickListener(this);
@@ -88,17 +99,64 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
 
     private void getPelajaran() {
         if (CommonHelper.checkInternet(this)) {
-            Gson gson = new Gson();
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://abangcoding.com/")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            APIRepository service = retrofit.create(APIRepository.class);
-            Call<PelajaranResponse> call = service.getAllPelajaran(session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER));
+            refreshLayout.setRefreshing(true);
+            Call<PelajaranResponse> call = service.getAllPelajaran(nig);
             call.enqueue(this);
         } else {
             Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void createPelajaran(String namaPelajaran, String nig) {
+        if (CommonHelper.checkInternet(this)) {
+            refreshLayout.setRefreshing(true);
+            Call<CreatePelajaranResponse> call = service.createPelajaran(nig, namaPelajaran);
+            call.enqueue(new Callback<CreatePelajaranResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<CreatePelajaranResponse> call, @NonNull Response<CreatePelajaranResponse> response) {
+                    refreshLayout.setRefreshing(false);
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            getPelajaran();
+                        }
+                    } else {
+                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<CreatePelajaranResponse> call, @NonNull Throwable t) {
+                    refreshLayout.setRefreshing(false);
+                    t.printStackTrace();
+                    Toast.makeText(PelajaranActivity.this, "Error gan..", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showAddPelajaran(final Context c) {
+        final EditText taskEditText = new EditText(c);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("Tambah Pelajaran")
+                .setMessage("Beri nama untuk pelajaran baru?")
+                .setView(taskEditText)
+                .setPositiveButton("Tambah", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String pelajaran = taskEditText.getText().toString().trim();
+                        if (pelajaran.isEmpty()) {
+                            Toast.makeText(PelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
+                            showAddPelajaran(c);
+                        } else {
+                            createPelajaran(pelajaran, nig);
+                        }
+                    }
+                })
+                .setNegativeButton("Batal", null)
+                .create();
+        dialog.show();
     }
 
     @Override
@@ -109,7 +167,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                         .setPermissionListener(new PermissionListener() {
                             @Override
                             public void onPermissionGranted() {
-                                startActivity(new Intent(PelajaranActivity.this, UploadMateriActivity.class));
+                                showAddPelajaran(PelajaranActivity.this);
                             }
 
                             @Override
