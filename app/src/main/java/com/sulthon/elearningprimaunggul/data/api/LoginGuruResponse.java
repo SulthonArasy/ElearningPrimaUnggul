@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse{
+public class LoginGuruResponse {
 
 	@SerializedName("success")
 	private int success;
@@ -54,7 +54,7 @@ public class LoginResponse{
     @Override
  	public String toString(){
 		return 
-			"LoginResponse{" + 
+			"LoginGuruResponse{" +
 			"success = '" + success + '\'' + 
 			",nm_guru = '" + nmGuru + '\'' + 
 			",message = '" + message + '\'' + 

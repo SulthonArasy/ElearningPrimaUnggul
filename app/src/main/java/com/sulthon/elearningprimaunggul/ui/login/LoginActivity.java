@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.data.api.LoginResponse;
+import com.sulthon.elearningprimaunggul.data.api.LoginGuruResponse;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
 import com.sulthon.elearningprimaunggul.ui.pelajaran.PelajaranActivity;
@@ -26,7 +26,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Callback<LoginResponse> {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Callback<LoginGuruResponse> {
 
     /**
      * guru = false, siswa = true
@@ -76,13 +76,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         APIRepository service = retrofit.create(APIRepository.class);
-        Call<LoginResponse> result = service.login(user, password);
+        Call<LoginGuruResponse> result = service.login(user, password);
 
         result.enqueue(this);
     }
 
     @Override
-    public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+    public void onResponse(@NonNull Call<LoginGuruResponse> call, @NonNull Response<LoginGuruResponse> response) {
         loading.dismiss();
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+    public void onFailure(@NonNull Call<LoginGuruResponse> call, @NonNull Throwable t) {
         loading.dismiss();
         t.printStackTrace();
         Toast.makeText(this, "Error gan..", Toast.LENGTH_SHORT).show();
