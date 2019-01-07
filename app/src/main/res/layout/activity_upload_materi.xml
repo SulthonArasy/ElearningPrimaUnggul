@@ -11,7 +11,7 @@
         android:layout_height="90dp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:src="@drawable/pu"/>
+        android:src="@drawable/pu" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,14 +30,15 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_pelajaran"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:background="#dfe6e9"
             android:hint="@string/pelajaran"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
@@ -54,19 +55,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Materi"
+            android:text="@string/materi"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_materi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:hint="Materi"
+            android:background="#dfe6e9"
+            android:hint="@string/materi"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
     </LinearLayout>
 
@@ -74,10 +76,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:paddingStart="20dp"
-        android:paddingEnd="40dp"
-        android:gravity="center_horizontal">
+        android:paddingEnd="40dp">
 
         <TextView
             android:layout_width="0dp"
@@ -88,15 +90,16 @@
             android:textStyle="bold" />
 
         <EditText
-            android:maxLines="5"
-            android:lines="5"
+            android:id="@+id/edt_deskripsi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:background="#dfe6e9"
             android:hint="@string/masukan_deskripsi"
             android:inputType="textMultiLine"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            android:lines="5"
+            android:maxLines="5"
+            tools:ignore="Autofill" />
 
     </LinearLayout>
 
@@ -104,37 +107,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
 
         <TextView
+            android:id="@+id/txt_file"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="@string/file"
-            android:textSize="20dp"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:textStyle="italic" />
 
         <Button
-            android:id="@+id/btn_choose_image"
-            android:src="@drawable/upload"
-            android:layout_width="90dp"
-            android:background="#FFFF8080"
+            android:id="@+id/btn_choose_file"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Upload"/>
+            android:background="#FFFF8080"
+            android:text="@string/pilih_file"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"/>
     </LinearLayout>
 
     <LinearLayout
@@ -143,11 +138,10 @@
         android:gravity="bottom">
 
         <Button
-            android:id="@+id/input_file"
+            android:id="@+id/btn_input_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/input_file"
-            />
+            android:text="@string/upload" />
     </LinearLayout>
 
 

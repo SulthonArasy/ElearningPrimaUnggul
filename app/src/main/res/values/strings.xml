@@ -41,4 +41,6 @@
     <string name="quiz">Quiz</string>
     <string name="buat_pelajaran_baru">Buat pelajaran baru</string>
     <string name="materi">Materi</string>
+    <string name="pilih_file">Pilih File</string>
+    <string name="upload">Upload</string>
 </resources>
