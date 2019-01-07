@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         session = new SharedPrefLogin(this);
 
         Button btnBuatPelajaran = findViewById(R.id.btn_buat_pelajaran);
+        TextView txtLogOut = findViewById(R.id.txt_log_out);
         refreshLayout = findViewById(R.id.swipe_refresh);
         recyclerView = findViewById(R.id.recycler_pelajaran);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,6 +53,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         onRefresh();
 
         btnBuatPelajaran.setOnClickListener(this);
+        txtLogOut.setOnClickListener(this);
         refreshLayout.setOnRefreshListener(this);
     }
 
@@ -98,25 +101,31 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-
     @Override
     public void onClick(View view) {
-        new TedPermission(PelajaranActivity.this)
-                .setPermissionListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        startActivity(new Intent(PelajaranActivity.this, UploadMateriActivity.class));
-                    }
+        switch (view.getId()) {
+            case R.id.btn_buat_pelajaran:
+                new TedPermission(PelajaranActivity.this)
+                        .setPermissionListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted() {
+                                startActivity(new Intent(PelajaranActivity.this, UploadMateriActivity.class));
+                            }
 
-                    @Override
-                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                        Toast.makeText(PelajaranActivity.this, "Kami memerlukan izin tersebut..", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .setPermissions(Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                .check();
+                            @Override
+                            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                                Toast.makeText(PelajaranActivity.this, "Kami memerlukan izin tersebut..", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        })
+                        .setPermissions(Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .check();
+                break;
+            case R.id.txt_log_out:
+                session.logout();
+                break;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.sulthon.elearningprimaunggul.service;
 
 import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
+import com.sulthon.elearningprimaunggul.data.api.materi.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.PelajaranResponse;
 
 import retrofit2.Call;
@@ -16,5 +17,9 @@ public interface APIRepository {
     @FormUrlEncoded
     @POST("api/pelajaran/read.php")
     Call<PelajaranResponse> getAllPelajaran(@Field("nig") String nig);
+
+    @FormUrlEncoded
+    @POST("api/materi/read.php")
+    Call<MateriResponse> getAllMateri(@Field("nig") String nig, @Field("idpel") String idpel);
 
 }

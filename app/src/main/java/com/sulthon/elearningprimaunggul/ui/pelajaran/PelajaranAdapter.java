@@ -59,7 +59,9 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
 
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context, ActivityListMateri.class));
+            Intent i = new Intent(context, ActivityListMateri.class);
+            i.putExtra("idpelajaran", dataList.get(getAdapterPosition()).getId());
+            context.startActivity(i);
         }
     }
 }
