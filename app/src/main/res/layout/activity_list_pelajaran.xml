@@ -23,103 +23,49 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FF969696"
         android:text="@string/iwan_sulistyono_st_mt"
-        android:textSize="20sp"
-        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:background="#FF969696" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        android:background="#FF969696"
         android:text="Log Out"
-        android:textSize="20sp"
-        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
-        android:background="#FF969696"
+        android:textSize="20sp"
+        android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        android:background="#FF008080"
         android:text="@string/list_pelajaran"
-        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:background="#FF008080" />
+        android:textSize="18sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_pelajaran"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    <!--<LinearLayout
-        android:id="@+id/btn_meteri"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        tools:ignore="UseCompoundDrawables"
-        android:background="#dfe6e9">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/materi_logika_dasar"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/folder" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        tools:ignore="UseCompoundDrawables"
-        android:background="#dfe6e9">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/materi_logika_dasar"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/folder" />
-    </LinearLayout>-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom">
-
-        <Button
-            android:id="@+id/btn_buat_pelajaran"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_pelajaran"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="buat pelajaran baru" />
-    </LinearLayout>
+            android:layout_height="wrap_content" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/btn_buat_pelajaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buat_pelajaran_baru" />
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtSiswa = findViewById(R.id.txt_siswa);
         txtUser = findViewById(R.id.txt_user);
 
-        if (session.isLoggedIn()){
+        if (session.isLoggedIn()) {
             startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
             finish();
             return;
@@ -76,19 +77,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void ambilData(String user, String password) {
-        loading = new ProgressDialog(this);
-        loading.setCancelable(false);
-        loading.setMessage("Tunggu Sebentar....");
-        loading.show();
-        Gson gson = new Gson();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://abangcoding.com/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        APIRepository service = retrofit.create(APIRepository.class);
-        Call<LoginGuruResponse> result = service.login(user, password);
+        if (CommonHelper.checkInternet(this)) {
+            loading = new ProgressDialog(this);
+            loading.setCancelable(false);
+            loading.setMessage("Tunggu Sebentar....");
+            loading.show();
+            Gson gson = new Gson();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://abangcoding.com/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            APIRepository service = retrofit.create(APIRepository.class);
+            Call<LoginGuruResponse> result = service.login(user, password);
 
-        result.enqueue(this);
+            result.enqueue(this);
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

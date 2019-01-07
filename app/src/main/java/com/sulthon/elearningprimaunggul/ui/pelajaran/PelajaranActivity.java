@@ -1,10 +1,10 @@
 package com.sulthon.elearningprimaunggul.ui.pelajaran;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.PelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
@@ -29,10 +30,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PelajaranActivity extends AppCompatActivity implements View.OnClickListener, Callback<PelajaranResponse> {
+public class PelajaranActivity extends AppCompatActivity implements View.OnClickListener, Callback<PelajaranResponse>, SwipeRefreshLayout.OnRefreshListener {
     private SharedPrefLogin session;
     private RecyclerView recyclerView;
-    private ProgressDialog loading;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +43,27 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         session = new SharedPrefLogin(this);
 
         Button btnBuatPelajaran = findViewById(R.id.btn_buat_pelajaran);
+        refreshLayout = findViewById(R.id.swipe_refresh);
         recyclerView = findViewById(R.id.recycler_pelajaran);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getPelajaran();
+        refreshLayout.setRefreshing(true);
+        onRefresh();
 
         btnBuatPelajaran.setOnClickListener(this);
+        refreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        getPelajaran();
     }
 
     @Override
     public void onResponse(@NonNull Call<PelajaranResponse> call, @NonNull Response<PelajaranResponse> response) {
-        loading.dismiss();
-        if (response.body()!=null){
-            if (response.body().getSuccess()==1){
+        refreshLayout.setRefreshing(false);
+        if (response.body() != null) {
+            if (response.body().getSuccess() == 1) {
                 setAdapterRecycler(response.body());
             }
         } else {
@@ -64,7 +73,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onFailure(@NonNull Call<PelajaranResponse> call, @NonNull Throwable t) {
-        loading.dismiss();
+        refreshLayout.setRefreshing(false);
         t.printStackTrace();
         Toast.makeText(this, "Error gan..", Toast.LENGTH_SHORT).show();
     }
@@ -75,18 +84,18 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getPelajaran() {
-        loading = new ProgressDialog(this);
-        loading.setCancelable(false);
-        loading.setMessage("Tunggu Sebentar....");
-        loading.show();
-        Gson gson = new Gson();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://abangcoding.com/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        APIRepository service = retrofit.create(APIRepository.class);
-        Call<PelajaranResponse> call = service.getAllPelajaran(session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER));
-        call.enqueue(this);
+        if (CommonHelper.checkInternet(this)) {
+            Gson gson = new Gson();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://abangcoding.com/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            APIRepository service = retrofit.create(APIRepository.class);
+            Call<PelajaranResponse> call = service.getAllPelajaran(session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER));
+            call.enqueue(this);
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
