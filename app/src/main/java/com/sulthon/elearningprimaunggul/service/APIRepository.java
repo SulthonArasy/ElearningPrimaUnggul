@@ -5,6 +5,7 @@ import com.sulthon.elearningprimaunggul.data.api.materi.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.create.CreateMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajaranResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -32,6 +33,13 @@ public interface APIRepository {
     Call<CreatePelajaranResponse> createPelajaran(
             @Field("nig") String nig,
             @Field("nama") String namaPelajaran);
+
+    @FormUrlEncoded
+    @POST("api/pelajaran/update.php")
+    Call<UpdatePelajaranResponse> updatePelajaran(
+            @Field("nig") String nig,
+            @Field("nama") String namaPelajaran,
+            @Field("id") String idpel);
 
     @FormUrlEncoded
     @POST("api/materi/read.php")

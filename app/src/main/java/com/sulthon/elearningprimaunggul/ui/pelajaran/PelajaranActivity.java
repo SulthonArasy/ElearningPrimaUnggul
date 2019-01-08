@@ -22,7 +22,9 @@ import com.gun0912.tedpermission.TedPermission;
 import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranItem;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 
@@ -89,11 +91,11 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
     public void onFailure(@NonNull Call<PelajaranResponse> call, @NonNull Throwable t) {
         refreshLayout.setRefreshing(false);
         t.printStackTrace();
-        Toast.makeText(this, "Error gan..", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Read error..", Toast.LENGTH_SHORT).show();
     }
 
     private void setAdapterRecycler(PelajaranResponse response) {
-        PelajaranAdapter adapter = new PelajaranAdapter(getApplicationContext(), response.getPelajaran());
+        PelajaranAdapter adapter = new PelajaranAdapter(this, response.getPelajaran());
         recyclerView.setAdapter(adapter);
     }
 
@@ -128,7 +130,36 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                 public void onFailure(@NonNull Call<CreatePelajaranResponse> call, @NonNull Throwable t) {
                     refreshLayout.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(PelajaranActivity.this, "Error gan..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PelajaranActivity.this, "Create error..", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void updatePelajaran(PelajaranItem pelajaran) {
+        if (CommonHelper.checkInternet(this)) {
+            refreshLayout.setRefreshing(true);
+            Call<UpdatePelajaranResponse> call = service.updatePelajaran(nig, pelajaran.getNama(), pelajaran.getId());
+            call.enqueue(new Callback<UpdatePelajaranResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<UpdatePelajaranResponse> call, @NonNull Response<UpdatePelajaranResponse> response) {
+                    refreshLayout.setRefreshing(false);
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            getPelajaran();
+                        }
+                    } else {
+                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<UpdatePelajaranResponse> call, @NonNull Throwable t) {
+                    refreshLayout.setRefreshing(false);
+                    t.printStackTrace();
+                    Toast.makeText(PelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -151,6 +182,30 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                             showAddPelajaran(c);
                         } else {
                             createPelajaran(pelajaran, nig);
+                        }
+                    }
+                })
+                .setNegativeButton("Batal", null)
+                .create();
+        dialog.show();
+    }
+
+    public void showUpdatePelajaran(final PelajaranItem pelajaranItem) {
+        final EditText taskEditText = new EditText(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Ubah Pelajaran")
+                .setMessage("Beri nama baru?")
+                .setView(taskEditText)
+                .setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String pelajaran = taskEditText.getText().toString().trim();
+                        if (pelajaran.isEmpty()) {
+                            Toast.makeText(PelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
+                            showUpdatePelajaran(pelajaranItem);
+                        } else {
+                            pelajaranItem.setNama(pelajaran);
+                            updatePelajaran(pelajaranItem);
                         }
                     }
                 })

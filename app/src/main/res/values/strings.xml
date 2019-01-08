@@ -51,4 +51,6 @@
     <string name="next_questions">next</string>
     <string name="Sebelum">Sebelum</string>
     <string name="Sebelumnya">Sebelumnya</string>
+    <string name="edit">Edit</string>
+    <string name="hapus">Hapus</string>
 </resources>
