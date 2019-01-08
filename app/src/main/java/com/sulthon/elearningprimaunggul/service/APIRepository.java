@@ -4,6 +4,7 @@ import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.create.CreateMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.delete.DeletePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajaranResponse;
 
@@ -39,6 +40,12 @@ public interface APIRepository {
     Call<UpdatePelajaranResponse> updatePelajaran(
             @Field("nig") String nig,
             @Field("nama") String namaPelajaran,
+            @Field("id") String idpel);
+
+    @FormUrlEncoded
+    @POST("api/pelajaran/delete.php")
+    Call<DeletePelajaranResponse> deletePelajaran(
+            @Field("nig") String nig,
             @Field("id") String idpel);
 
     @FormUrlEncoded

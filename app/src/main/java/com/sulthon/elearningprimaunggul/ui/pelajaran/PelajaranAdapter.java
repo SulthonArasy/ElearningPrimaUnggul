@@ -75,6 +75,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
                     ((PelajaranActivity) activity).showUpdatePelajaran(dataList.get(getAdapterPosition()));
                     break;
                 case R.id.btn_hapus:
+                    ((PelajaranActivity) activity).showDeletePelajaran(dataList.get(getAdapterPosition()));
                     break;
             }
         }

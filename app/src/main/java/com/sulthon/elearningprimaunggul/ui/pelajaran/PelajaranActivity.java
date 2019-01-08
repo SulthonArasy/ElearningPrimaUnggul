@@ -22,6 +22,7 @@ import com.gun0912.tedpermission.TedPermission;
 import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
+import com.sulthon.elearningprimaunggul.data.api.pelajaran.delete.DeletePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranItem;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajaranResponse;
@@ -167,6 +168,35 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    public void deletePelajaran(PelajaranItem pelajaran) {
+        if (CommonHelper.checkInternet(this)) {
+            refreshLayout.setRefreshing(true);
+            Call<DeletePelajaranResponse> call = service.deletePelajaran(nig, pelajaran.getId());
+            call.enqueue(new Callback<DeletePelajaranResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<DeletePelajaranResponse> call, @NonNull Response<DeletePelajaranResponse> response) {
+                    refreshLayout.setRefreshing(false);
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            getPelajaran();
+                        }
+                    } else {
+                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<DeletePelajaranResponse> call, @NonNull Throwable t) {
+                    refreshLayout.setRefreshing(false);
+                    t.printStackTrace();
+                    Toast.makeText(PelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void showAddPelajaran(final Context c) {
         final EditText taskEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
@@ -210,6 +240,21 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                     }
                 })
                 .setNegativeButton("Batal", null)
+                .create();
+        dialog.show();
+    }
+
+    public void showDeletePelajaran(final PelajaranItem pelajaranItem) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Peringatan")
+                .setMessage("Apakah anda yakin ingin menghapus pelajaran " + pelajaranItem.getNama() + "?")
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deletePelajaran(pelajaranItem);
+                    }
+                })
+                .setNegativeButton("Tidak", null)
                 .create();
         dialog.show();
     }
