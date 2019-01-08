@@ -25,7 +25,7 @@
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <Button
+    <Button style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/btn_buat_materi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

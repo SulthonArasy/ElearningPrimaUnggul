@@ -45,4 +45,10 @@
     <string name="upload">Upload</string>
     <string name="download">Download</string>
     <string name="tambah_quiz">Tambah Quiz</string>
+    <string name="sebelum">SEBELUM</string>
+    <string name="lanjutkan">LANJUTKAN</string>
+    <string name="action_settings">Settings</string>
+    <string name="next_questions">next</string>
+    <string name="Sebelum">Sebelum</string>
+    <string name="Sebelumnya">Sebelumnya</string>
 </resources>

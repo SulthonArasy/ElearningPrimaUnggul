@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:gravity="bottom">
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/btn_input_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

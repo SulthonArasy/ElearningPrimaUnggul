@@ -38,18 +38,18 @@
     <LinearLayout
         android:id="@+id/btn_meteri"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="100dp"
         android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="20dp"
         android:paddingEnd="30dp"
         tools:ignore="UseCompoundDrawables"
-        android:background="#dfe6e9">
+        android:background="#ffff99">
 
         <TextView
             android:id="@+id/txt_nama_materi"
-            android:layout_width="235dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@android:color/black"
@@ -57,26 +57,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/txt_download"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="@string/download"
-            android:textSize="18sp"
+            android:textSize="14dp"
+            android:background="#ffff6600"
             android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/txt_quis"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:background="#ff00ff00"
             android:text="@string/quiz"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:gravity="center"/>
     </LinearLayout>
     </LinearLayout>
 
@@ -87,7 +93,7 @@
         android:gravity="bottom"
         android:orientation="vertical">
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/btn_quiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -18,7 +18,7 @@ public class ActivityNilai extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_row_nilai);
+        setContentView(R.layout.activity_nilai);
 
         addData();
 
@@ -35,10 +35,19 @@ public class ActivityNilai extends AppCompatActivity {
 
     void addData(){
         nilaiArrayList = new ArrayList<>();
-        nilaiArrayList.add(new Nilai("15150", "Maulana", "95"));
+        nilaiArrayList.add(new Nilai("1234", "joko", "95"));
+        nilaiArrayList.add(new Nilai("4321", "Sulthon", "90"));
         nilaiArrayList.add(new Nilai("15151", "Yonk", "75"));
         nilaiArrayList.add(new Nilai("15152", "Nugraha", "80"));
-        nilaiArrayList.add(new Nilai("15153", "Siswana", "90"));
+        nilaiArrayList.add(new Nilai("4321", "Sulthon", "90"));
+        nilaiArrayList.add(new Nilai("15151", "Yonk", "75"));
+        nilaiArrayList.add(new Nilai("15152", "Nugraha", "80"));
+        nilaiArrayList.add(new Nilai("4321", "Sulthon", "90"));
+        nilaiArrayList.add(new Nilai("15151", "Yonk", "75"));
+        nilaiArrayList.add(new Nilai("15152", "Nugraha", "80"));
+        nilaiArrayList.add(new Nilai("4321", "Sulthon", "90"));
+        nilaiArrayList.add(new Nilai("15151", "Yonk", "75"));
+        nilaiArrayList.add(new Nilai("15152", "Nugraha", "80"));
     }
 
 }

@@ -28,7 +28,6 @@
         <activity android:name=".ui.pelajaran.PelajaranActivity" />
         <activity android:name=".ui.materi.ActivityListMateri" />
         <activity android:name=".ui.uploadmateri.UploadMateriActivity" />
-        <activity android:name=".ui.quiz.ActivityQuiz" />
         <activity android:name=".ui.about.AboutActivity" />
         <activity android:name=".ui.quiz.InputQuiz" />
         <activity android:name=".ui.nilai.ActivityNilai" />

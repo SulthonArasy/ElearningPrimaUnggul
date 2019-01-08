@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.ui.nilai.ActivityNilai;
@@ -24,27 +23,5 @@ public class InputQuiz extends AppCompatActivity {
                 startActivity(new Intent(InputQuiz.this, ActivityNilai.class));
             }
         });
-    }
-    public void onRadioButton(View view) {
-
-        Boolean checked = ((RadioButton) view).isChecked();
-
-
-        switch (view.getId()) {
-            case R.id.radioButton:
-                if (checked)
-                break;
-            case R.id.radioButton2:
-                if (checked)
-                break;
-            case R.id.radioButton3:
-                if (checked)
-                break;
-            case R.id.radioButton4:
-                if (checked)
-                break;
-        }
-
-
     }
 }

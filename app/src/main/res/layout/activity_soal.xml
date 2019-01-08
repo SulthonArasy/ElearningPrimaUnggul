@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.soal.SoalActivity">
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_pertanyaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. kepanjangan dari WWW ?"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="40dp">
+
+            <RadioButton
+                android:id="@+id/rb_jawaban1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A" />
+
+            <RadioButton
+                android:id="@+id/rb_jawaban2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="B" />
+
+            <RadioButton
+                android:id="@+id/rb_jawaban3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C" />
+
+            <RadioButton
+                android:id="@+id/rb_jawaban4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="D" />
+            <RadioButton
+                android:id="@+id/rb_jawaban5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E" />
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="50dp">
+
+        <Button
+            android:id="@+id/btn_sebelum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ffff9900"
+            android:outlineProvider="bounds"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1.5"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp"
+            android:text="@string/Sebelumnya"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="23sp" />
+
+        <Button
+            android:id="@+id/btn_lanjut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ff00ff00"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1.5"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp"
+            android:text="@string/lanjutkan"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="23sp" />
+    </LinearLayout>    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/lihat_nilai"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lihat Nilai Siswa"/>
+    </LinearLayout>
+</LinearLayout>
