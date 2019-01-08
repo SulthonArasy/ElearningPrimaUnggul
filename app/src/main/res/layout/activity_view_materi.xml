@@ -94,6 +94,12 @@
         android:orientation="vertical">
 
         <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/lihat_nilai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lihat Nilai Siswa"/>
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/btn_quiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

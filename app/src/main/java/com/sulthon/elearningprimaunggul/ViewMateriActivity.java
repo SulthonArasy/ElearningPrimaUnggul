@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sulthon.elearningprimaunggul.data.api.materi.MateriItem;
+import com.sulthon.elearningprimaunggul.ui.nilai.ActivityNilai;
 import com.sulthon.elearningprimaunggul.ui.quiz.InputQuiz;
 import com.sulthon.elearningprimaunggul.ui.soal.SoalActivity;
 
@@ -66,6 +67,8 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
             case R.id.txt_quis:
                 startActivity((new Intent(ViewMateriActivity.this, SoalActivity.class)));
                 break;
+            case R.id.lihat_nilai:
+                startActivity(new Intent(ViewMateriActivity.this, ActivityNilai.class));
             case R.id.txt_download:
                 new DownloadFile().execute(materi.getUrlFile());
                 break;

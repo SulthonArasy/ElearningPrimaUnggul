@@ -17,13 +17,6 @@ public class SoalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soal);
 
-        Button btnNilai = findViewById(R.id.lihat_nilai);
-        btnNilai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SoalActivity.this,ActivityNilai.class));
-            }
-        });
     }
 
 }
