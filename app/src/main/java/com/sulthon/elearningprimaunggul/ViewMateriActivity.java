@@ -42,6 +42,8 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
         TextView txtDownload = findViewById(R.id.txt_download);
         Button btnKuis = findViewById(R.id.btn_quiz);
         TextView txtQuis = findViewById(R.id.txt_quis);
+        Button btnLihatNilai = findViewById(R.id.lihat_nilai);
+
 
         if (getIntent().getExtras() != null) {
             materi = (MateriItem) getIntent().getExtras().getSerializable("data");
@@ -52,10 +54,11 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
                 txtNamaMateri.setText(materi.getNama());
             }
         }
-
+        btnLihatNilai.setOnClickListener(this);
         btnKuis.setOnClickListener(this);
         txtQuis.setOnClickListener(this);
         txtDownload.setOnClickListener(this);
+
     }
 
     @Override
@@ -69,6 +72,7 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.lihat_nilai:
                 startActivity(new Intent(ViewMateriActivity.this, ActivityNilai.class));
+                break;
             case R.id.txt_download:
                 new DownloadFile().execute(materi.getUrlFile());
                 break;
