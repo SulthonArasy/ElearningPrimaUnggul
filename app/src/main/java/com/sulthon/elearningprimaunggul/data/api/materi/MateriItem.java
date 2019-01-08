@@ -1,8 +1,12 @@
 package com.sulthon.elearningprimaunggul.data.api.materi;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class MateriItem{
+import java.io.Serializable;
+
+public class MateriItem implements Serializable {
 
 	@SerializedName("nama")
 	private String nama;
@@ -37,6 +41,7 @@ public class MateriItem{
 		return id;
 	}
 
+	@NonNull
 	@Override
  	public String toString(){
 		return 

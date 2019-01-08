@@ -58,7 +58,9 @@ public class MateriAdapter extends RecyclerView.Adapter<MateriAdapter.ActivityLi
 
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context, ViewMateriActivity.class));
+            Intent i = new Intent(context, ViewMateriActivity.class);
+            i.putExtra("data", dataList.get(getAdapterPosition()));
+            context.startActivity(i);
         }
     }
 }

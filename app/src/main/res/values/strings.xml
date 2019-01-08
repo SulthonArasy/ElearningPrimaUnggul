@@ -43,4 +43,6 @@
     <string name="materi">Materi</string>
     <string name="pilih_file">Pilih File</string>
     <string name="upload">Upload</string>
+    <string name="download">Download</string>
+    <string name="tambah_quiz">Tambah Quiz</string>
 </resources>
