@@ -3,6 +3,7 @@ package com.sulthon.elearningprimaunggul.ui.materi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ActivityListMateri extends AppCompatActivity implements View.OnClickListener, Callback<MateriResponse>, SwipeRefreshLayout.OnRefreshListener {
+    private static final int REQUEST_CREATE_MATERI = 200;
     private RecyclerView recyclerViewMateri;
     private SwipeRefreshLayout swipeRefresh;
     private String idPel;
@@ -89,7 +91,9 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onFailure(@NonNull Call<MateriResponse> call, @NonNull Throwable t) {
-
+        swipeRefresh.setRefreshing(false);
+        t.printStackTrace();
+        Toast.makeText(this, "Error gan..", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -104,6 +108,18 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(ActivityListMateri.this, UploadMateriActivity.class));
+        Intent i = new Intent(ActivityListMateri.this, UploadMateriActivity.class);
+        i.putExtra("idpelajaran", idPel);
+        startActivityForResult(i, REQUEST_CREATE_MATERI);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CREATE_MATERI) {
+                onRefresh();
+            }
+        }
     }
 }
