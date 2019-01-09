@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranItem;
-import com.sulthon.elearningprimaunggul.ui.listmateri.ActivityListMateri;
+import com.sulthon.elearningprimaunggul.ui.listmateri.ListMateriActivity;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
 
     private List<PelajaranItem> dataList;
     private Activity activity;
-    private boolean isGuru = true;
+    private boolean isGuru;
 
     PelajaranAdapter(Activity activity, List<PelajaranItem> dataList, boolean isGuru) {
         this.dataList = dataList;
@@ -73,7 +73,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.cardview:
-                    Intent i = new Intent(activity, ActivityListMateri.class);
+                    Intent i = new Intent(activity, ListMateriActivity.class);
                     i.putExtra("idpelajaran", dataList.get(getAdapterPosition()).getId());
                     activity.startActivity(i);
                     break;
