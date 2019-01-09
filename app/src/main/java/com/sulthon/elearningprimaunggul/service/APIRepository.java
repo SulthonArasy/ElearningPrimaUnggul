@@ -11,6 +11,7 @@ import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranRespons
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.soal.create.CreateSoalResponse;
 import com.sulthon.elearningprimaunggul.data.api.soal.delete.DeleteSoalResponse;
+import com.sulthon.elearningprimaunggul.data.api.soal.read.SoalResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -78,6 +79,12 @@ public interface APIRepository {
     Call<DeleteMateriResponse> deleteMateri(
             @Field("nig") String nig,
             @Field("id") String idMateri);
+
+    @FormUrlEncoded
+    @POST("api/soal/read.php")
+    Call<SoalResponse> getAllSoal(
+            @Field("nig") String nig,
+            @Field("id_quiz") String idQuiz);
 
     @FormUrlEncoded
     @POST("api/soal/create.php")

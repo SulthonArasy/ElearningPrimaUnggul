@@ -34,7 +34,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/txt_nama_materi"
+                android:id="@+id/txt_pertanyaan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -51,31 +51,31 @@
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/radio_a"
+                android:id="@+id/rb_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Jawaban_A" />
 
             <RadioButton
-                android:id="@+id/radio_b"
+                android:id="@+id/rb_b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Jawaban_B" />
 
             <RadioButton
-                android:id="@+id/radio_c"
+                android:id="@+id/rb_c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Jawaban_C" />
 
             <RadioButton
-                android:id="@+id/radio_d"
+                android:id="@+id/rb_d"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Jawaban_D" />
 
             <RadioButton
-                android:id="@+id/radio_e"
+                android:id="@+id/rb_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Jawaban_E" />

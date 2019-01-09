@@ -66,8 +66,8 @@ public class MateriItem implements Serializable {
 	@NonNull
 	@Override
  	public String toString(){
-		return 
-			"MateriItem{" + 
+		return
+                "SoalItem{" +
 			"nama = '" + nama + '\'' +
 					",url_file = '" + urlFile + '\'' +
 					",id = '" + id + '\'' +

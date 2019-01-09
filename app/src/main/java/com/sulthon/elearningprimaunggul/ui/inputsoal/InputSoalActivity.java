@@ -86,19 +86,19 @@ public class InputSoalActivity extends AppCompatActivity implements View.OnClick
         } else {
             String jawaban;
             switch (radioGroup.getCheckedRadioButtonId()) {
-                case R.id.radio_a:
+                case R.id.rb_a:
                     jawaban = "jwb_a";
                     break;
-                case R.id.radio_b:
+                case R.id.rb_b:
                     jawaban = "jwb_b";
                     break;
-                case R.id.radio_c:
+                case R.id.rb_c:
                     jawaban = "jwb_c";
                     break;
-                case R.id.radio_d:
+                case R.id.rb_d:
                     jawaban = "jwb_d";
                     break;
-                case R.id.radio_e:
+                case R.id.rb_e:
                     jawaban = "jwb_e";
                     break;
                 default:
