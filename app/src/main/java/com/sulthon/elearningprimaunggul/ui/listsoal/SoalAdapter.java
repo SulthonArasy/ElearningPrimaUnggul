@@ -62,7 +62,6 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.ActivityListMa
                 break;
         }
         holder.radioGroup.setActivated(false);
-        holder.btnHapus.setOnClickListener(null);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.ActivityListMa
         return (dataList != null) ? dataList.size() : 0;
     }
 
-    class ActivityListMateriViewHolder extends RecyclerView.ViewHolder {
+    class ActivityListMateriViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtNo, txtPertanyaan;
         private Button btnHapus;
         private RadioGroup radioGroup;
@@ -94,6 +93,13 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.ActivityListMa
             rbC.setEnabled(false);
             rbD.setEnabled(false);
             rbE.setEnabled(false);
+
+            btnHapus.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            ((ListSoalActivity) activity).showDeleteSoal(dataList.get(getAdapterPosition()));
         }
     }
 }

@@ -103,6 +103,6 @@ public interface APIRepository {
     @POST("api/soal/delete.php")
     Call<DeleteSoalResponse> deleteSoal(
             @Field("nig") String nig,
-            @Field("id_soal") String idMateri);
+            @Field("id_soal") String idSoal);
 
 }
