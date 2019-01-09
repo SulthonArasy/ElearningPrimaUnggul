@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
                 LoginGuruResponse data = response.body();
-                session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken());
+                session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken(), "guru");
 
                 Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));

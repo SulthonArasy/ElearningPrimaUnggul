@@ -15,6 +15,7 @@ public class SharedPrefLogin {
     public static final String KEY_TOKEN = "token";
     private static final String PREF_NAME = "PUPreference";
     private static final String IS_LOGIN = "isLoggedIn";
+    private static final String IS_GURU = "isGuru";
 
     private SharedPreferences pref;
     private Editor editor;
@@ -27,7 +28,10 @@ public class SharedPrefLogin {
         editor = pref.edit();
     }
 
-    public void saveLogin(String idUser, String name, String token) {
+    public void saveLogin(String idUser, String name, String token, String level) {
+        if (level.equals("guru")) {
+            editor.putBoolean(IS_GURU, true);
+        }
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID_USER, idUser);
         editor.putString(KEY_NAME, name);
@@ -35,6 +39,14 @@ public class SharedPrefLogin {
         editor.commit();
     }
 
+    /**
+     * Check guru atau siswa
+     *
+     * @return true jika guru, false jika siswa
+     */
+    public boolean isGuru() {
+        return pref.getBoolean(IS_GURU, false);
+    }
 
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<>();

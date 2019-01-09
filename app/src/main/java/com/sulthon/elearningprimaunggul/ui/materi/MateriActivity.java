@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul;
+package com.sulthon.elearningprimaunggul.ui.materi;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -14,10 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriItem;
+import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
+import com.sulthon.elearningprimaunggul.ui.listsoal.ListSoalActivity;
 import com.sulthon.elearningprimaunggul.ui.nilai.ActivityNilai;
-import com.sulthon.elearningprimaunggul.ui.quiz.InputQuiz;
 import com.sulthon.elearningprimaunggul.ui.soal.SoalActivity;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,18 +33,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ViewMateriActivity extends AppCompatActivity implements View.OnClickListener {
+public class MateriActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MateriItem materi;
+    private SharedPrefLogin session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_materi);
+        setContentView(R.layout.activity_materi);
+
+        session = new SharedPrefLogin(this);
 
         TextView txtNamaMateri = findViewById(R.id.txt_nama_materi);
         TextView txtDownload = findViewById(R.id.txt_download);
-        Button btnKuis = findViewById(R.id.btn_quiz);
         TextView txtQuis = findViewById(R.id.txt_quis);
         Button btnLihatNilai = findViewById(R.id.lihat_nilai);
 
@@ -55,7 +61,6 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
             }
         }
         btnLihatNilai.setOnClickListener(this);
-        btnKuis.setOnClickListener(this);
         txtQuis.setOnClickListener(this);
         txtDownload.setOnClickListener(this);
 
@@ -64,14 +69,17 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_quiz:
-                startActivity(new Intent(ViewMateriActivity.this, InputQuiz.class));
-                break;
             case R.id.txt_quis:
-                startActivity((new Intent(ViewMateriActivity.this, SoalActivity.class)));
+                if (session.isGuru()) {
+                    Intent i = new Intent(this, ListSoalActivity.class);
+                    i.putExtra("idquiz", materi.getIdQuiz());
+                    startActivity(i);
+                } else {
+                    startActivity((new Intent(MateriActivity.this, SoalActivity.class)));
+                }
                 break;
             case R.id.lihat_nilai:
-                startActivity(new Intent(ViewMateriActivity.this, ActivityNilai.class));
+                startActivity(new Intent(MateriActivity.this, ActivityNilai.class));
                 break;
             case R.id.txt_download:
                 AlertDownload();
@@ -81,7 +89,7 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
     }
 
     void AlertDownload() {
-        AlertDialog dialog = new AlertDialog.Builder(ViewMateriActivity.this)
+        AlertDialog dialog = new AlertDialog.Builder(MateriActivity.this)
                 .setTitle("Peringatan")
                 .setMessage("Apakah anda yakin mendownload Materi " + materi.getNama() + "?")
                 .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
@@ -104,7 +112,6 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
         private ProgressDialog progressDialog;
         private String fileName;
         private String folder;
-        private boolean isDownloaded;
 
         /**
          * Before starting background thread
@@ -113,7 +120,7 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            this.progressDialog = new ProgressDialog(ViewMateriActivity.this);
+            this.progressDialog = new ProgressDialog(MateriActivity.this);
             this.progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             this.progressDialog.setCancelable(false);
             this.progressDialog.show();

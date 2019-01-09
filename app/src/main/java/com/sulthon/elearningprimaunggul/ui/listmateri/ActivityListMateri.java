@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul.ui.materi;
+package com.sulthon.elearningprimaunggul.ui.listmateri;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,13 +45,14 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
     private APIRepository service = retrofit.create(APIRepository.class);
+    private SharedPrefLogin session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_materi);
 
-        SharedPrefLogin session = new SharedPrefLogin(this);
+        session = new SharedPrefLogin(this);
 
         Button btnBuatMateri = findViewById(R.id.btn_buat_materi);
         swipeRefresh = findViewById(R.id.swipe_refresh);

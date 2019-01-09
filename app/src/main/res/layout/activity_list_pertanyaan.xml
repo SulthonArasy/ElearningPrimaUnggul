@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.listmateri.ActivityListMateri">
+    tools:context=".ui.listsoal.ListSoalActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -14,20 +14,20 @@
         android:src="@drawable/pu" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_materi"
+            android:id="@+id/recycler_soal"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <Button style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/btn_buat_materi"
+    <Button
+        android:id="@+id/btn_tambah_soal"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buat_materi_baru" />
+        android:text="@string/tambah_soal" />
 </LinearLayout>

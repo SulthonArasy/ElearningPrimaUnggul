@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul.ui.materi;
+package com.sulthon.elearningprimaunggul.ui.listmateri;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.ViewMateriActivity;
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriItem;
+import com.sulthon.elearningprimaunggul.ui.materi.MateriActivity;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class MateriAdapter extends RecyclerView.Adapter<MateriAdapter.ActivityLi
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.view_materi:
-                    Intent i = new Intent(activity, ViewMateriActivity.class);
+                    Intent i = new Intent(activity, MateriActivity.class);
                     i.putExtra("data", dataList.get(getAdapterPosition()));
                     activity.startActivity(i);
                     break;

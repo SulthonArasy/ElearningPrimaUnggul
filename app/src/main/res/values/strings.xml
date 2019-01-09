@@ -28,11 +28,9 @@
     <string name="iwan_sulistyono_st_mt">IWAN SULISTYONO, ST, MT</string>
     <string name="about">about</string>
     <string name="Jawaban_A">Jawaban A</string>
-    <string name="Jawaban_B" />
-    <string name="Jawabanb">Jawaban B</string>
+    <string name="Jawaban_B">Jawaban B</string>
     <string name="Jawaban_C">Jawaban C</string>
-    <string name="Jawaban_D" />
-    <string name="Jawaband">Jawaban D</string>
+    <string name="Jawaban_D">Jawaban D</string>
     <string name="Jawaban_E">Jawaban E</string>
     <string name="jawaban_benar">Jawaban Benar</string>
     <string name="web">web 1</string>
@@ -53,4 +51,7 @@
     <string name="Sebelumnya">Sebelumnya</string>
     <string name="edit">Edit</string>
     <string name="hapus">Hapus</string>
+    <string name="tambah_soal">Tambah soal</string>
+    <string name="pertanyaan">Pertanyaan</string>
+    <string name="simpan">Simpan</string>
 </resources>

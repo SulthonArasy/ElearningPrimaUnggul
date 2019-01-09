@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ViewMateriActivity">
+    tools:context=".ui.materi.MateriActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="@string/download"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:background="#ffff6600"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:background="#ff00ff00"
             android:text="@string/quiz"
@@ -98,12 +98,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lihat Nilai Siswa"/>
-
-        <Button style="@style/Widget.AppCompat.Button.Colored"
-            android:id="@+id/btn_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tambah_quiz" />
 
         <!--<EditText
             android:layout_width="match_parent"

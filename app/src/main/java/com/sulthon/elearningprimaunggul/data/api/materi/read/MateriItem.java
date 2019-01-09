@@ -17,6 +17,28 @@ public class MateriItem implements Serializable {
 	@SerializedName("id")
 	private String id;
 
+	@SerializedName("id_quiz")
+	private String idQuiz;
+
+	@SerializedName("quiz")
+	private String quiz;
+
+	public String getIdQuiz() {
+		return idQuiz;
+	}
+
+	public void setIdQuiz(String idQuiz) {
+		this.idQuiz = idQuiz;
+	}
+
+	public String getQuiz() {
+		return quiz;
+	}
+
+	public void setQuiz(String quiz) {
+		this.quiz = quiz;
+	}
+
 	public void setNama(String nama){
 		this.nama = nama;
 	}
@@ -46,9 +68,11 @@ public class MateriItem implements Serializable {
  	public String toString(){
 		return 
 			"MateriItem{" + 
-			"nama = '" + nama + '\'' + 
-			",url_file = '" + urlFile + '\'' + 
-			",id = '" + id + '\'' + 
+			"nama = '" + nama + '\'' +
+					",url_file = '" + urlFile + '\'' +
+					",id = '" + id + '\'' +
+					",idQuiz = '" + idQuiz + '\'' +
+					",quiz = '" + quiz + '\'' +
 			"}";
 		}
 }

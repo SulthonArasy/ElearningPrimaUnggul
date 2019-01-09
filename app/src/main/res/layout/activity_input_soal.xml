@@ -3,38 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quiz.InputQuiz"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.inputsoal.InputSoalActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:paddingStart="20dp"
-        android:paddingEnd="10dp"
-        android:gravity="center_horizontal">
+        android:paddingEnd="10dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="pertanyaan"
+            android:text="@string/pertanyaan"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_pertanyaan"
             android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_weight="1.7"
             android:background="#dfe6e9"
-            android:hint="masukan pertanyaan"
             android:inputType="textMultiLine"
             android:lines="5"
             android:maxLines="5"
-            tools:ignore="Autofill" />
+            tools:ignore="Autofill,LabelFor" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,22 +48,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="jawaban A"
+            android:text="@string/Jawaban_A"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:background="#dfe6e9"
             android:hint="@string/Jawaban_A"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,22 +78,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="jawaban B"
+            android:text="@string/Jawaban_B"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:hint="@string/Jawabanb"
+            android:background="#dfe6e9"
+            android:hint="@string/Jawaban_B"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,22 +108,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="jawaban C"
+            android:text="@string/Jawaban_C"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_c"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:background="#dfe6e9"
             android:hint="@string/Jawaban_C"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,22 +138,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="jawaban D"
+            android:text="@string/Jawaban_D"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_d"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:hint="@string/Jawaband"
+            android:background="#dfe6e9"
+            android:hint="@string/Jawaban_D"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -159,19 +168,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="jawaban E"
+            android:text="@string/Jawaban_E"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_e"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:background="#dfe6e9"
             android:hint="@string/Jawaban_E"
             android:inputType="text"
             android:maxLength="10"
-            tools:ignore="Autofill"
-            android:background="#dfe6e9"/>
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
@@ -193,33 +203,40 @@
             android:textStyle="bold" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="A"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="B"/>
+            <RadioButton
+                android:id="@+id/rb_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C" />
+            <RadioButton
+                android:id="@+id/rb_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="D"/>
+            <RadioButton
+                android:id="@+id/rb_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="E"/>
+            <RadioButton
+                android:id="@+id/rb_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D" />
+
+            <RadioButton
+                android:id="@+id/rb_e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E" />
         </RadioGroup>
 
     </LinearLayout>
@@ -230,12 +247,12 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
-        <Button style="@style/Widget.AppCompat.Button.Colored"
-            android:id="@+id/input_file"
+        <Button
+            android:id="@+id/btn_simpan"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="simpan"
-            />
+            android:text="@string/simpan" />
     </LinearLayout>
 
 </LinearLayout>

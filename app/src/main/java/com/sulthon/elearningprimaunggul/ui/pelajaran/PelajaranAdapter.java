@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranItem;
-import com.sulthon.elearningprimaunggul.ui.materi.ActivityListMateri;
+import com.sulthon.elearningprimaunggul.ui.listmateri.ActivityListMateri;
 
 import java.util.List;
 
