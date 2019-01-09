@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.pelajaran.ListPelajaranActivity" />
-        <activity android:name=".ui.listmateri.ActivityListMateri" />
+        <activity android:name=".ui.listmateri.ListMateriActivity" />
         <activity android:name=".ui.uploadmateri.UploadMateriActivity" />
         <activity android:name=".ui.about.AboutActivity" />
         <activity android:name=".ui.inputsoal.InputSoalActivity" />

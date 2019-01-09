@@ -33,7 +33,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ActivityListMateri extends AppCompatActivity implements View.OnClickListener, Callback<MateriResponse>, SwipeRefreshLayout.OnRefreshListener {
+public class ListMateriActivity extends AppCompatActivity implements View.OnClickListener, Callback<MateriResponse>, SwipeRefreshLayout.OnRefreshListener {
     private static final int REQUEST_CREATE_MATERI = 200;
     private RecyclerView recyclerViewMateri;
     private SwipeRefreshLayout swipeRefresh;
@@ -57,7 +57,7 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
         Button btnBuatMateri = findViewById(R.id.btn_buat_materi);
         swipeRefresh = findViewById(R.id.swipe_refresh);
         recyclerViewMateri = findViewById(R.id.recycler_materi);
-        recyclerViewMateri.setLayoutManager(new LinearLayoutManager(ActivityListMateri.this));
+        recyclerViewMateri.setLayoutManager(new LinearLayoutManager(ListMateriActivity.this));
 
         if (getIntent().getExtras() != null) {
             idPel = getIntent().getExtras().getString("idpelajaran");
@@ -70,6 +70,8 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                 finish();
             }
         }
+
+        if (!session.isGuru()) btnBuatMateri.setVisibility(View.GONE);
 
         swipeRefresh.setOnRefreshListener(this);
         btnBuatMateri.setOnClickListener(this);
@@ -86,7 +88,7 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                     public void onClick(DialogInterface dialog, int which) {
                         String materi = taskEditText.getText().toString().trim();
                         if (materi.isEmpty()) {
-                            Toast.makeText(ActivityListMateri.this, "Nama Materi harus diisi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListMateriActivity.this, "Nama Materi harus diisi", Toast.LENGTH_SHORT).show();
                             showUpdateMateri(materiItem);
                         } else {
                             materiItem.setNama(materi);
@@ -133,11 +135,11 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                     swipeRefresh.setRefreshing(false);
                     if (response.body() != null) {
                         if (response.body().getSuccess() == 1) {
-                            Toast.makeText(ActivityListMateri.this, "Berhasil update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListMateriActivity.this, "Berhasil update", Toast.LENGTH_SHORT).show();
                             getMateri(idPel, nig);
                         }
                     } else {
-                        Toast.makeText(ActivityListMateri.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListMateriActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -145,7 +147,7 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                 public void onFailure(@NonNull Call<UpdateMateriResponse> call, @NonNull Throwable t) {
                     swipeRefresh.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(ActivityListMateri.this, "Update error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListMateriActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -163,13 +165,13 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                     swipeRefresh.setRefreshing(false);
                     if (response.body() != null) {
                         if (response.body().getSuccess() == 1) {
-                            Toast.makeText(ActivityListMateri.this, "Berhasil delete", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListMateriActivity.this, "Berhasil delete", Toast.LENGTH_SHORT).show();
                             getMateri(idPel, nig);
                         } else {
-                            Toast.makeText(ActivityListMateri.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListMateriActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(ActivityListMateri.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListMateriActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -177,7 +179,7 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
                 public void onFailure(@NonNull Call<DeleteMateriResponse> call, @NonNull Throwable t) {
                     swipeRefresh.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(ActivityListMateri.this, "Update error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListMateriActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -210,13 +212,13 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
     }
 
     private void setAdapterMateri(MateriResponse response) {
-        MateriAdapter adapter = new MateriAdapter(response.getMateri(), this);
+        MateriAdapter adapter = new MateriAdapter(response.getMateri(), this, session.isGuru());
         recyclerViewMateri.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(ActivityListMateri.this, UploadMateriActivity.class);
+        Intent i = new Intent(ListMateriActivity.this, UploadMateriActivity.class);
         i.putExtra("idpelajaran", idPel);
         startActivityForResult(i, REQUEST_CREATE_MATERI);
     }
