@@ -67,7 +67,7 @@
             android:background="#dfe6e9"
             android:hint="@string/materi"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="20"
             tools:ignore="Autofill" />
 
     </LinearLayout>

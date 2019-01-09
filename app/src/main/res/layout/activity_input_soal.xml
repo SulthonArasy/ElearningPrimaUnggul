@@ -32,6 +32,7 @@
             android:inputType="textMultiLine"
             android:lines="5"
             android:maxLines="5"
+            android:maxLength="150"
             tools:ignore="Autofill,LabelFor" />
 
     </LinearLayout>
@@ -60,7 +61,7 @@
             android:background="#dfe6e9"
             android:hint="@string/Jawaban_A"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             tools:ignore="Autofill" />
 
 
@@ -90,7 +91,7 @@
             android:background="#dfe6e9"
             android:hint="@string/Jawaban_B"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             tools:ignore="Autofill" />
 
 
@@ -120,7 +121,7 @@
             android:background="#dfe6e9"
             android:hint="@string/Jawaban_C"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             tools:ignore="Autofill" />
 
 
@@ -150,7 +151,7 @@
             android:background="#dfe6e9"
             android:hint="@string/Jawaban_D"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             tools:ignore="Autofill" />
 
 
@@ -180,7 +181,7 @@
             android:background="#dfe6e9"
             android:hint="@string/Jawaban_E"
             android:inputType="text"
-            android:maxLength="10"
+            android:maxLength="30"
             tools:ignore="Autofill" />
 
 
