@@ -14,12 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriItem;
 import com.sulthon.elearningprimaunggul.ui.nilai.ActivityNilai;
 import com.sulthon.elearningprimaunggul.ui.quiz.InputQuiz;
 import com.sulthon.elearningprimaunggul.ui.soal.SoalActivity;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;

@@ -35,88 +35,97 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#dfe6e9"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="30dp"
-            tools:ignore="UseCompoundDrawables">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Sulthonudin Arasy
-Universitas Budi luhur"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:layout_marginTop="5dp"
+                android:background="#dfe6e9"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="30dp"
+                tools:ignore="UseCompoundDrawables">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="140dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/sulthon" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#dfe6e9"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="30dp"
-            tools:ignore="UseCompoundDrawables">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Sulthonudin Arasy\nUniversitas Budi luhur"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="140dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/sulthon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Muhamadfachri syahputra
+                android:layout_marginTop="5dp"
+                android:background="#dfe6e9"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="30dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Muhamadfachri syahputra
 Universitas Budi luhur"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="140dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/sulthon" />
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="140dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/sulthon" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#dfe6e9"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="30dp"
-            tools:ignore="UseCompoundDrawables">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Haribi Aldiansyah
+                android:layout_marginTop="5dp"
+                android:background="#dfe6e9"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="30dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Haribi Aldiansyah
 Universitas Budi luhur"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="140dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/sulthon" />
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="140dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/sulthon" />
 
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
