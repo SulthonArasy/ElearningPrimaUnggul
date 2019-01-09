@@ -2,10 +2,12 @@ package com.sulthon.elearningprimaunggul;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -74,9 +76,25 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(ViewMateriActivity.this, ActivityNilai.class));
                 break;
             case R.id.txt_download:
-                new DownloadFile().execute(materi.getUrlFile());
+                AlertDownload();
+
                 break;
         }
+    }
+
+    void AlertDownload() {
+        AlertDialog dialog = new AlertDialog.Builder(ViewMateriActivity.this)
+                .setTitle("Peringatan")
+                .setMessage("Apakah anda yakin mendownload Materi " + materi.getNama() + "?")
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new DownloadFile().execute(materi.getUrlFile());
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .create();
+        dialog.show();
     }
 
     /**
@@ -154,6 +172,8 @@ public class ViewMateriActivity extends AppCompatActivity implements View.OnClic
 
             return "Something went wrong";
         }
+
+
 
         /**
          * Updating progress bar

@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         ambilData(edtUser.getText().toString(), edtPass.getText().toString());
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Anda bukan seorang guru", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Mungkin Anda Bukan Seorang Siswa.", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

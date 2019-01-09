@@ -77,7 +77,7 @@ public class ActivityListMateri extends AppCompatActivity implements View.OnClic
     public void showUpdateMateri(final MateriItem materiItem) {
         final EditText taskEditText = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Ubah Pelajaran")
+                .setTitle("Ubah Materi")
                 .setMessage("Beri nama baru?")
                 .setView(taskEditText)
                 .setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
