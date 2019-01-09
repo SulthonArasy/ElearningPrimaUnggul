@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sulthon.elearningprimaunggul.R;
@@ -21,10 +22,12 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
 
     private List<PelajaranItem> dataList;
     private Activity activity;
+    private boolean isGuru = true;
 
-    PelajaranAdapter(Activity activity, List<PelajaranItem> dataList) {
+    PelajaranAdapter(Activity activity, List<PelajaranItem> dataList, boolean isGuru) {
         this.dataList = dataList;
         this.activity = activity;
+        this.isGuru = isGuru;
     }
 
     @NonNull
@@ -38,6 +41,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
     @Override
     public void onBindViewHolder(@NonNull PelajaranActivityViewHolder holder, int position) {
         holder.txtNama.setText(dataList.get(position).getNama());
+        if (!isGuru) holder.linearOpsi.setVisibility(View.GONE);
     }
 
     @Override
@@ -50,6 +54,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
         private CardView cardView;
         private Button btnEdit;
         private Button btnHapus;
+        private LinearLayout linearOpsi;
 
         PelajaranActivityViewHolder(View itemView) {
             super(itemView);
@@ -57,6 +62,7 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
             cardView = itemView.findViewById(R.id.cardview);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnHapus = itemView.findViewById(R.id.btn_hapus);
+            linearOpsi = itemView.findViewById(R.id.linear_opsi);
 
             cardView.setOnClickListener(this);
             btnEdit.setOnClickListener(this);
@@ -72,10 +78,10 @@ public class PelajaranAdapter extends RecyclerView.Adapter<PelajaranAdapter.Pela
                     activity.startActivity(i);
                     break;
                 case R.id.btn_edit:
-                    ((PelajaranActivity) activity).showUpdatePelajaran(dataList.get(getAdapterPosition()));
+                    ((ListPelajaranActivity) activity).showUpdatePelajaran(dataList.get(getAdapterPosition()));
                     break;
                 case R.id.btn_hapus:
-                    ((PelajaranActivity) activity).showDeletePelajaran(dataList.get(getAdapterPosition()));
+                    ((ListPelajaranActivity) activity).showDeletePelajaran(dataList.get(getAdapterPosition()));
                     break;
             }
         }

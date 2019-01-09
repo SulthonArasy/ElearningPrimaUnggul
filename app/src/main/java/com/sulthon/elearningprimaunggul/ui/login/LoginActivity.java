@@ -20,7 +20,7 @@ import com.sulthon.elearningprimaunggul.data.api.login.LoginSiswaResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
-import com.sulthon.elearningprimaunggul.ui.pelajaran.PelajaranActivity;
+import com.sulthon.elearningprimaunggul.ui.pelajaran.ListPelajaranActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtUser = findViewById(R.id.txt_user);
 
         if (session.isLoggedIn()) {
-            startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+            startActivity(new Intent(LoginActivity.this, ListPelajaranActivity.class));
             finish();
             return;
         }
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 session.saveLogin(edtUser.getText().toString(), data.getNmSiswa(), data.getToken(), "siswa");
 
                                 Toast.makeText(LoginActivity.this, "Berhasil login", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+                                startActivity(new Intent(LoginActivity.this, ListPelajaranActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Data Login Siswa null", Toast.LENGTH_SHORT).show();
@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken(), "guru");
 
                     Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+                    startActivity(new Intent(LoginActivity.this, ListPelajaranActivity.class));
                     finish();
                 } else {
                     Toast.makeText(this, "Data Login Guru null", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PelajaranActivity extends AppCompatActivity implements View.OnClickListener,
+public class ListPelajaranActivity extends AppCompatActivity implements View.OnClickListener,
         Callback<PelajaranResponse>, SwipeRefreshLayout.OnRefreshListener {
     private SharedPrefLogin session;
     private RecyclerView recyclerView;
@@ -57,12 +58,21 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
 
         session = new SharedPrefLogin(this);
         nig = session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER);
+        String namaUser = session.getUserDetails().get(SharedPrefLogin.KEY_NAME);
 
         Button btnBuatPelajaran = findViewById(R.id.btn_buat_pelajaran);
         TextView txtLogOut = findViewById(R.id.txt_log_out);
+        TextView txtNama = findViewById(R.id.txt_nama_user);
+        ImageView imgUser = findViewById(R.id.img_user);
         refreshLayout = findViewById(R.id.swipe_refresh);
         recyclerView = findViewById(R.id.recycler_pelajaran);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        txtNama.setText(namaUser);
+        if (!session.isGuru()) {
+            imgUser.setImageResource(R.drawable.pu);
+            btnBuatPelajaran.setVisibility(View.GONE);
+        }
 
         onRefresh();
 
@@ -96,7 +106,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void setAdapterRecycler(PelajaranResponse response) {
-        PelajaranAdapter adapter = new PelajaranAdapter(this, response.getPelajaran());
+        PelajaranAdapter adapter = new PelajaranAdapter(this, response.getPelajaran(), session.isGuru());
         recyclerView.setAdapter(adapter);
     }
 
@@ -123,7 +133,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                             getPelajaran();
                         }
                     } else {
-                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListPelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -131,7 +141,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                 public void onFailure(@NonNull Call<CreatePelajaranResponse> call, @NonNull Throwable t) {
                     refreshLayout.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(PelajaranActivity.this, "Create error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListPelajaranActivity.this, "Create error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -152,7 +162,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                             getPelajaran();
                         }
                     } else {
-                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListPelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -160,7 +170,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                 public void onFailure(@NonNull Call<UpdatePelajaranResponse> call, @NonNull Throwable t) {
                     refreshLayout.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(PelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListPelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -181,7 +191,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                             getPelajaran();
                         }
                     } else {
-                        Toast.makeText(PelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListPelajaranActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -189,7 +199,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                 public void onFailure(@NonNull Call<DeletePelajaranResponse> call, @NonNull Throwable t) {
                     refreshLayout.setRefreshing(false);
                     t.printStackTrace();
-                    Toast.makeText(PelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListPelajaranActivity.this, "Update error..", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -208,7 +218,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         String pelajaran = taskEditText.getText().toString().trim();
                         if (pelajaran.isEmpty()) {
-                            Toast.makeText(PelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListPelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
                             showAddPelajaran(c);
                         } else {
                             createPelajaran(pelajaran, nig);
@@ -231,7 +241,7 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         String pelajaran = taskEditText.getText().toString().trim();
                         if (pelajaran.isEmpty()) {
-                            Toast.makeText(PelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListPelajaranActivity.this, "Nama pelajaran harus diisi", Toast.LENGTH_SHORT).show();
                             showUpdatePelajaran(pelajaranItem);
                         } else {
                             pelajaranItem.setNama(pelajaran);
@@ -263,16 +273,16 @@ public class PelajaranActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_buat_pelajaran:
-                new TedPermission(PelajaranActivity.this)
+                new TedPermission(ListPelajaranActivity.this)
                         .setPermissionListener(new PermissionListener() {
                             @Override
                             public void onPermissionGranted() {
-                                showAddPelajaran(PelajaranActivity.this);
+                                showAddPelajaran(ListPelajaranActivity.this);
                             }
 
                             @Override
                             public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                                Toast.makeText(PelajaranActivity.this, "Kami memerlukan izin tersebut..", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListPelajaranActivity.this, "Kami memerlukan izin tersebut..", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })

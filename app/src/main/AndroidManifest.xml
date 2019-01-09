@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.pelajaran.PelajaranActivity" />
+        <activity android:name=".ui.pelajaran.ListPelajaranActivity" />
         <activity android:name=".ui.listmateri.ActivityListMateri" />
         <activity android:name=".ui.uploadmateri.UploadMateriActivity" />
         <activity android:name=".ui.about.AboutActivity" />
