@@ -1,6 +1,7 @@
 package com.sulthon.elearningprimaunggul.service;
 
 import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
+import com.sulthon.elearningprimaunggul.data.api.login.LoginSiswaResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.create.CreateMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.delete.DeleteMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriResponse;
@@ -25,8 +26,14 @@ import retrofit2.http.Part;
 public interface APIRepository {
     @FormUrlEncoded
     @POST("api/login-guru.php")
-    Call<LoginGuruResponse> login(
+    Call<LoginGuruResponse> loginGuru(
             @Field("nig") String nig,
+            @Field("pass") String pass);
+
+    @FormUrlEncoded
+    @POST("api/login-siswa.php")
+    Call<LoginSiswaResponse> loginSiswa(
+            @Field("nis") String nis,
             @Field("pass") String pass);
 
     @FormUrlEncoded

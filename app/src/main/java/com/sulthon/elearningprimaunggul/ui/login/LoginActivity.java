@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
+import com.sulthon.elearningprimaunggul.data.api.login.LoginSiswaResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 import com.sulthon.elearningprimaunggul.ui.about.AboutActivity;
@@ -41,6 +42,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView txtUser;
     private EditText edtPass;
     private SharedPrefLogin session;
+    private Gson gson = new Gson();
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://abangcoding.com/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build();
+    private APIRepository service = retrofit.create(APIRepository.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,19 +83,57 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnAbout.setOnClickListener(this);
     }
 
-    private void ambilData(String user, String password) {
+    private void loginSiswa(String user, String password) {
         if (CommonHelper.checkInternet(this)) {
             loading = new ProgressDialog(this);
             loading.setCancelable(false);
             loading.setMessage("Tunggu Sebentar....");
             loading.show();
-            Gson gson = new Gson();
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://abangcoding.com/")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            APIRepository service = retrofit.create(APIRepository.class);
-            Call<LoginGuruResponse> result = service.login(user, password);
+            Call<LoginSiswaResponse> result = service.loginSiswa(user, password);
+
+            result.enqueue(new Callback<LoginSiswaResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<LoginSiswaResponse> call, @NonNull Response<LoginSiswaResponse> response) {
+                    loading.dismiss();
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            LoginSiswaResponse data = response.body();
+                            if (data != null) {
+                                session.saveLogin(edtUser.getText().toString(), data.getNmSiswa(), data.getToken(), "siswa");
+
+                                Toast.makeText(LoginActivity.this, "Berhasil login", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Data Login Siswa null", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<LoginSiswaResponse> call, @NonNull Throwable t) {
+                    loading.dismiss();
+                    t.printStackTrace();
+                    Toast.makeText(LoginActivity.this, "Error gan..", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loginGuru(String user, String password) {
+        if (CommonHelper.checkInternet(this)) {
+            loading = new ProgressDialog(this);
+            loading.setCancelable(false);
+            loading.setMessage("Tunggu Sebentar....");
+            loading.show();
+            Call<LoginGuruResponse> result = service.loginGuru(user, password);
 
             result.enqueue(this);
         } else {
@@ -102,11 +147,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
                 LoginGuruResponse data = response.body();
-                session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken(), "guru");
+                if (data != null) {
+                    session.saveLogin(edtUser.getText().toString(), data.getNmGuru(), data.getToken(), "guru");
 
-                Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
-                finish();
+                    Toast.makeText(this, "Berhasil login", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, PelajaranActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Data Login Guru null", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, response.body().getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -147,19 +196,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 txtSiswa.setTextColor(Color.BLACK);
                 break;
             case R.id.btn_login:
-                //jika isSiswa false, login guru
-                if (!isSiswa) {
-                    String user = edtUser.getText().toString().trim();
-                    String pass = edtPass.getText().toString().trim();
-                    if (user.isEmpty()) {
-                        Toast.makeText(this, "NIG tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                    } else if (pass.isEmpty()) {
-                        Toast.makeText(this, "Kata sandi tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        ambilData(edtUser.getText().toString(), edtPass.getText().toString());
-                    }
+                String user = edtUser.getText().toString().trim();
+                String pass = edtPass.getText().toString().trim();
+
+                if (user.isEmpty()) {
+                    Toast.makeText(this, "NIG tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                } else if (pass.isEmpty()) {
+                    Toast.makeText(this, "Kata sandi tidak boleh kosong!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Mungkin Anda Bukan Seorang Siswa.", Toast.LENGTH_LONG).show();
+                    if (isSiswa) {  //jika true login ke siswa, jika false login ke guru
+                        loginSiswa(user, pass);
+                    } else {
+                        loginGuru(user, pass);
+                    }
                 }
                 break;
         }

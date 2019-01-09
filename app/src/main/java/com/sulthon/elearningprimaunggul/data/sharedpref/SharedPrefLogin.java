@@ -13,6 +13,7 @@ public class SharedPrefLogin {
     public static final String KEY_ID_USER = "iduser";
     public static final String KEY_NAME = "name";
     public static final String KEY_TOKEN = "token";
+    public static final String KEY_KELAS = "kelassiswa";
     private static final String PREF_NAME = "PUPreference";
     private static final String IS_LOGIN = "isLoggedIn";
     private static final String IS_GURU = "isGuru";
@@ -53,6 +54,7 @@ public class SharedPrefLogin {
         user.put(KEY_ID_USER, pref.getString(KEY_ID_USER, null));
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_TOKEN, pref.getString(KEY_TOKEN, null));
+        user.put(KEY_KELAS, pref.getString(KEY_KELAS, null));
         return user;
     }
 
