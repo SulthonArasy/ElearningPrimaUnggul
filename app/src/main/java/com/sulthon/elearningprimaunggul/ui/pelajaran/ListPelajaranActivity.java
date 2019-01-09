@@ -293,6 +293,7 @@ public class ListPelajaranActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.txt_log_out:
                 session.logout();
+                finishAffinity();
                 break;
         }
     }

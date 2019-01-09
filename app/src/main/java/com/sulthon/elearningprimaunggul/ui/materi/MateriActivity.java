@@ -60,6 +60,9 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
                 txtNamaMateri.setText(materi.getNama());
             }
         }
+
+        if (!session.isGuru()) btnLihatNilai.setVisibility(View.GONE);
+
         btnLihatNilai.setOnClickListener(this);
         txtQuis.setOnClickListener(this);
         txtDownload.setOnClickListener(this);
@@ -75,7 +78,9 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
                     i.putExtra("idquiz", materi.getIdQuiz());
                     startActivity(i);
                 } else {
-                    startActivity((new Intent(MateriActivity.this, SoalActivity.class)));
+                    Intent i = new Intent(this, SoalActivity.class);
+                    i.putExtra("idquiz", materi.getIdQuiz());
+                    startActivity(i);
                 }
                 break;
             case R.id.lihat_nilai:

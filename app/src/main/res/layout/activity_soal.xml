@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/activity_main"
@@ -13,13 +16,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_nomor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. "
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/txt_pertanyaan"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. kepanjangan dari WWW ?"
+                android:text="@string/app_name"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -36,69 +49,65 @@
             android:paddingEnd="40dp">
 
             <RadioButton
-                android:id="@+id/rb_jawaban1"
+                android:id="@+id/rb_a"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="A" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/rb_jawaban2"
+                android:id="@+id/rb_b"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="B" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/rb_jawaban3"
+                android:id="@+id/rb_c"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="C" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/rb_jawaban4"
+                android:id="@+id/rb_d"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="D" />
+                android:layout_height="wrap_content" />
+
             <RadioButton
-                android:id="@+id/rb_jawaban5"
+                android:id="@+id/rb_e"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="E" />
+                android:layout_height="wrap_content" />
         </RadioGroup>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="5dp"
         android:paddingTop="50dp">
 
         <Button
             android:id="@+id/btn_sebelum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#ffff9900"
-            android:outlineProvider="bounds"
             android:layout_marginEnd="5dp"
             android:layout_weight="1.5"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/holo_orange_light"
             android:padding="10dp"
             android:text="@string/Sebelumnya"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="23sp" />
+            android:textSize="18sp"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/btn_lanjut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#ff00ff00"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="1.5"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/holo_green_light"
             android:padding="10dp"
             android:text="@string/lanjutkan"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="23sp" />
+            android:textSize="18sp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>
