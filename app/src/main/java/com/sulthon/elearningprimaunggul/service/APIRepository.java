@@ -1,8 +1,10 @@
 package com.sulthon.elearningprimaunggul.service;
 
 import com.sulthon.elearningprimaunggul.data.api.login.LoginGuruResponse;
-import com.sulthon.elearningprimaunggul.data.api.materi.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.create.CreateMateriResponse;
+import com.sulthon.elearningprimaunggul.data.api.materi.delete.DeleteMateriResponse;
+import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriResponse;
+import com.sulthon.elearningprimaunggul.data.api.materi.update.UpdateMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.delete.DeletePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
@@ -61,5 +63,18 @@ public interface APIRepository {
             @Part("id_pelajaran") RequestBody idpel,
             @Part("materi") RequestBody namaMateri,
             @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("api/materi/update.php")
+    Call<UpdateMateriResponse> updateMateri(
+            @Field("nig") String nig,
+            @Field("nama") String namaMateri,
+            @Field("id") String idMateri);
+
+    @FormUrlEncoded
+    @POST("api/materi/delete.php")
+    Call<DeleteMateriResponse> deleteMateri(
+            @Field("nig") String nig,
+            @Field("id") String idMateri);
 
 }

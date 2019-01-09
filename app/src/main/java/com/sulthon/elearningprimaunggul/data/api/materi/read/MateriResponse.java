@@ -1,7 +1,8 @@
-package com.sulthon.elearningprimaunggul.data.api.materi;
+package com.sulthon.elearningprimaunggul.data.api.materi.read;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-import com.google.gson.annotations.SerializedName;
 
 public class MateriResponse{
 

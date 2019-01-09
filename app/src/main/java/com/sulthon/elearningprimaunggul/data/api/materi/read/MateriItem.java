@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul.data.api.materi;
+package com.sulthon.elearningprimaunggul.data.api.materi.read;
 
 import android.support.annotation.NonNull;
 
