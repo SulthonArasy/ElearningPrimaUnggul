@@ -168,16 +168,28 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalResp
         txtNilai.setText(strNilai);
     }
 
+    private void nilaiBerhasilDiInput(String nilai, String keterangan) {
+        linearSoal.setVisibility(View.GONE);
+        txtNilai.setVisibility(View.VISIBLE);
+        String strNilai = "Nilai anda : " + nilai + "\n" +
+                "Jawaban benar " + keterangan + ".";
+        txtNilai.setText(strNilai);
+    }
+
     @Override
     public void onResponse(@NonNull Call<SoalResponse> call, @NonNull Response<SoalResponse> response) {
         loading.dismiss();
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
-                if (response.body().getSoal().size() == 0) {
-                    Toast.makeText(this, "Tidak ada soal untuk hari ini..", Toast.LENGTH_SHORT).show();
-                    finish();
+                if (response.body().getNilai() != null) {
+                    nilaiBerhasilDiInput(response.body().getNilai(), response.body().getKeterangan());
                 } else {
-                    showAllSoal(response.body().getSoal());
+                    if (response.body().getSoal().size() == 0) {
+                        Toast.makeText(this, "Tidak ada soal untuk hari ini..", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        showAllSoal(response.body().getSoal());
+                    }
                 }
             } else {
                 Toast.makeText(this, "Respon -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();

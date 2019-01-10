@@ -17,6 +17,28 @@ public class SoalResponse {
     @SerializedName("message")
     private String message;
 
+    @SerializedName("nilai")
+    private String nilai;
+
+    @SerializedName("keterangan")
+    private String keterangan;
+
+    public String getKeterangan() {
+        return keterangan;
+    }
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
+    }
+
+    public String getNilai() {
+        return nilai;
+    }
+
+    public void setNilai(String nilai) {
+        this.nilai = nilai;
+    }
+
     public int getSuccess() {
         return success;
     }
@@ -49,6 +71,8 @@ public class SoalResponse {
                         "soal = '" + soal + '\'' +
                         ",success = '" + success + '\'' +
                         ",message = '" + message + '\'' +
+                        ",nilai = '" + nilai + '\'' +
+                        ",keterangan = '" + keterangan + '\'' +
                         "}";
     }
 }
