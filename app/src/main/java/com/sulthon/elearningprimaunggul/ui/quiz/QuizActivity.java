@@ -1,4 +1,4 @@
-package com.sulthon.elearningprimaunggul.ui.soal;
+package com.sulthon.elearningprimaunggul.ui.quiz;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -31,14 +31,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class SoalActivity extends AppCompatActivity implements Callback<SoalResponse>, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class QuizActivity extends AppCompatActivity implements Callback<SoalResponse>, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private Gson gson = new Gson();
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://abangcoding.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
     private APIRepository service = retrofit.create(APIRepository.class);
-    private SharedPrefLogin session;
     private ProgressDialog loading;
     private List<SoalItem> soalItems;
     private Button btnSebelum;
@@ -61,9 +60,9 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalResp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_soal);
+        setContentView(R.layout.activity_quiz);
 
-        session = new SharedPrefLogin(this);
+        SharedPrefLogin session = new SharedPrefLogin(this);
         nis = session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER);
 
         txtNo = findViewById(R.id.txt_nomor);
@@ -101,7 +100,6 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalResp
 
     private void getAllSoalSiswa(String idQuiz) {
         if (CommonHelper.checkInternet(this)) {
-
             loading = new ProgressDialog(this);
             loading.setCancelable(false);
             loading.setMessage("Tunggu sebentar..");
@@ -141,10 +139,10 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalResp
                         if (response.body().getSuccess() == 1) {
                             nilaiBerhasilDiInput(nilai, tmpJawabanBenar);
                         } else {
-                            Toast.makeText(SoalActivity.this, "Respon -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QuizActivity.this, "Respon -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(SoalActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -152,7 +150,7 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalResp
                 public void onFailure(@NonNull Call<CreateNilaiResponse> call, @NonNull Throwable t) {
                     loading.dismiss();
                     t.printStackTrace();
-                    Toast.makeText(SoalActivity.this, "Error create nilai -> " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuizActivity.this, "Error create nilai -> " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

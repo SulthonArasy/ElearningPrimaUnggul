@@ -31,7 +31,7 @@
         <activity android:name=".ui.about.AboutActivity" />
         <activity android:name=".ui.inputsoal.InputSoalActivity" />
         <activity android:name=".ui.nilai.ActivityNilai" />
-        <activity android:name=".ui.soal.SoalActivity" />
+        <activity android:name=".ui.quiz.QuizActivity" />
         <activity android:name=".ui.materi.MateriActivity" />
         <activity android:name=".ui.listsoal.ListSoalActivity"></activity>
     </application>

@@ -7,6 +7,7 @@ import com.sulthon.elearningprimaunggul.data.api.materi.delete.DeleteMateriRespo
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.update.UpdateMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.nilai.CreateNilaiResponse;
+import com.sulthon.elearningprimaunggul.data.api.nilai.read.NilaiResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.delete.DeletePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
@@ -112,6 +113,12 @@ public interface APIRepository {
     Call<DeleteSoalResponse> deleteSoal(
             @Field("nig") String nig,
             @Field("id_soal") String idSoal);
+
+    @FormUrlEncoded
+    @POST("api/nilai/read.php")
+    Call<NilaiResponse> getAllNilai(
+            @Field("nig") String nig,
+            @Field("id_quiz") String idQuiz);
 
     @FormUrlEncoded
     @POST("api/nilai/create.php")

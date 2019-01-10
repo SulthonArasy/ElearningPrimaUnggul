@@ -129,7 +129,6 @@ public class ListSoalActivity extends AppCompatActivity implements View.OnClickL
         } else {
             Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override

@@ -20,7 +20,7 @@ import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriItem;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.ui.listsoal.ListSoalActivity;
 import com.sulthon.elearningprimaunggul.ui.nilai.ActivityNilai;
-import com.sulthon.elearningprimaunggul.ui.soal.SoalActivity;
+import com.sulthon.elearningprimaunggul.ui.quiz.QuizActivity;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -50,7 +50,6 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
         TextView txtQuis = findViewById(R.id.txt_quis);
         Button btnLihatNilai = findViewById(R.id.lihat_nilai);
 
-
         if (getIntent().getExtras() != null) {
             materi = (MateriItem) getIntent().getExtras().getSerializable("data");
             if (materi == null) {
@@ -78,22 +77,23 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
                     i.putExtra("idquiz", materi.getIdQuiz());
                     startActivity(i);
                 } else {
-                    Intent i = new Intent(this, SoalActivity.class);
+                    Intent i = new Intent(this, QuizActivity.class);
                     i.putExtra("idquiz", materi.getIdQuiz());
                     startActivity(i);
                 }
                 break;
             case R.id.lihat_nilai:
-                startActivity(new Intent(MateriActivity.this, ActivityNilai.class));
+                Intent i = new Intent(this, ActivityNilai.class);
+                i.putExtra("idquiz", materi.getIdQuiz());
+                startActivity(i);
                 break;
             case R.id.txt_download:
                 AlertDownload();
-
                 break;
         }
     }
 
-    void AlertDownload() {
+    private void AlertDownload() {
         AlertDialog dialog = new AlertDialog.Builder(MateriActivity.this)
                 .setTitle("Peringatan")
                 .setMessage("Apakah anda yakin mendownload Materi " + materi.getNama() + "?")
@@ -118,10 +118,6 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
         private String fileName;
         private String folder;
 
-        /**
-         * Before starting background thread
-         * Show Progress Bar Dialog
-         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -131,9 +127,6 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
             this.progressDialog.show();
         }
 
-        /**
-         * Downloading file in background thread
-         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -183,20 +176,13 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
             return "Something went wrong";
         }
 
-
-
-        /**
-         * Updating progress bar
-         */
         protected void onProgressUpdate(String... progress) {
             progressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
-
         @Override
         protected void onPostExecute(String message) {
             this.progressDialog.dismiss();
-
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
     }
