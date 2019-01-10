@@ -1,5 +1,6 @@
 package com.sulthon.elearningprimaunggul.ui.materi;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.sulthon.elearningprimaunggul.R;
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriItem;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
@@ -30,6 +33,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -88,7 +92,22 @@ public class MateriActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(i);
                 break;
             case R.id.txt_download:
-                AlertDownload();
+                new TedPermission(MateriActivity.this)
+                        .setPermissionListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted() {
+                                AlertDownload();
+                            }
+
+                            @Override
+                            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                                Toast.makeText(MateriActivity.this, "Kami memerlukan izin tersebut..", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setPermissions(Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .check();
                 break;
         }
     }
