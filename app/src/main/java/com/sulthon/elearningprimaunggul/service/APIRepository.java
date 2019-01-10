@@ -6,6 +6,7 @@ import com.sulthon.elearningprimaunggul.data.api.materi.create.CreateMateriRespo
 import com.sulthon.elearningprimaunggul.data.api.materi.delete.DeleteMateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.read.MateriResponse;
 import com.sulthon.elearningprimaunggul.data.api.materi.update.UpdateMateriResponse;
+import com.sulthon.elearningprimaunggul.data.api.nilai.CreateNilaiResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.create.CreatePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.delete.DeletePelajaranResponse;
 import com.sulthon.elearningprimaunggul.data.api.pelajaran.read.PelajaranResponse;
@@ -13,7 +14,6 @@ import com.sulthon.elearningprimaunggul.data.api.pelajaran.update.UpdatePelajara
 import com.sulthon.elearningprimaunggul.data.api.soal.create.CreateSoalResponse;
 import com.sulthon.elearningprimaunggul.data.api.soal.delete.DeleteSoalResponse;
 import com.sulthon.elearningprimaunggul.data.api.soal.read.SoalResponse;
-import com.sulthon.elearningprimaunggul.data.api.soal.readsiswa.SoalSiswaResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -89,12 +89,6 @@ public interface APIRepository {
             @Field("id") String idMateri);
 
     @FormUrlEncoded
-    @POST("api/soal/read-siswa.php")
-    Call<SoalSiswaResponse> getAllSoalSiswa(
-            @Field("nis") String nis,
-            @Field("id_quiz") String idQuiz);
-
-    @FormUrlEncoded
     @POST("api/soal/read.php")
     Call<SoalResponse> getAllSoal(
             @Field("nig") String nig,
@@ -118,5 +112,13 @@ public interface APIRepository {
     Call<DeleteSoalResponse> deleteSoal(
             @Field("nig") String nig,
             @Field("id_soal") String idSoal);
+
+    @FormUrlEncoded
+    @POST("api/nilai/create.php")
+    Call<CreateNilaiResponse> createNilai(
+            @Field("nilai") String nilai,
+            @Field("id_quiz") String idQuiz,
+            @Field("nis") String nis,
+            @Field("keterangan") String ket);
 
 }

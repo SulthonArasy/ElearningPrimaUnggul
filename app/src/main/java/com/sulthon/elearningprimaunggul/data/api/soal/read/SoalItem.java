@@ -30,6 +30,17 @@ public class SoalItem {
     @SerializedName("pertanyaan")
     private String pertanyaan;
 
+    @SerializedName("jawaban_pilihan")
+    private String jwbanPilihan;
+
+    public String getJwbanPilihan() {
+        return jwbanPilihan;
+    }
+
+    public void setJwbanPilihan(String jwbanPilihan) {
+        this.jwbanPilihan = jwbanPilihan;
+    }
+
     public String getA() {
         return A;
     }
@@ -107,6 +118,7 @@ public class SoalItem {
                         ",id = '" + id + '\'' +
                         ",jawaban = '" + jawaban + '\'' +
                         ",pertanyaan = '" + pertanyaan + '\'' +
+                        ",jwbanPilihan = '" + jwbanPilihan + '\'' +
                         "}";
     }
 }

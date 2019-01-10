@@ -8,7 +8,7 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:id="@+id/activity_main"
+        android:id="@+id/linear_soal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -73,41 +73,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RadioGroup>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:orientation="horizontal"
-        android:paddingTop="50dp">
-
-        <Button
-            android:id="@+id/btn_sebelum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1.5"
-            android:background="@android:color/holo_orange_light"
-            android:padding="10dp"
-            android:text="@string/Sebelumnya"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/btn_lanjut"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_weight="1.5"
-            android:background="@android:color/holo_green_light"
+            android:orientation="horizontal"
+            android:paddingTop="50dp">
+
+            <Button
+                android:id="@+id/btn_sebelum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1.5"
+                android:background="@android:color/holo_orange_light"
+                android:padding="10dp"
+                android:text="@string/Sebelumnya"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btn_lanjut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1.5"
+                android:background="@android:color/holo_green_light"
+                android:padding="10dp"
+                android:text="@string/lanjutkan"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_selesai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_blue_bright"
             android:padding="10dp"
-            android:text="@string/lanjutkan"
+            android:text="@string/selesai"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
+            android:visibility="invisible"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_nilai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 </LinearLayout>

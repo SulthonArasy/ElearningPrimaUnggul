@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -15,8 +16,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.sulthon.elearningprimaunggul.CommonHelper;
 import com.sulthon.elearningprimaunggul.R;
-import com.sulthon.elearningprimaunggul.data.api.soal.readsiswa.SoalItem;
-import com.sulthon.elearningprimaunggul.data.api.soal.readsiswa.SoalSiswaResponse;
+import com.sulthon.elearningprimaunggul.data.api.nilai.CreateNilaiResponse;
+import com.sulthon.elearningprimaunggul.data.api.soal.read.SoalItem;
+import com.sulthon.elearningprimaunggul.data.api.soal.read.SoalResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 
@@ -29,7 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class SoalActivity extends AppCompatActivity implements Callback<SoalSiswaResponse>, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class SoalActivity extends AppCompatActivity implements Callback<SoalResponse>, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private Gson gson = new Gson();
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://abangcoding.com/")
@@ -41,15 +43,20 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
     private List<SoalItem> soalItems;
     private Button btnSebelum;
     private Button btnLanjut;
+    private Button btnSelesai;
     private TextView txtNo;
     private TextView txtPertanyaan;
+    private TextView txtNilai;
     private RadioGroup radioGroup;
     private RadioButton rbA;
     private RadioButton rbB;
     private RadioButton rbC;
     private RadioButton rbD;
     private RadioButton rbE;
+    private LinearLayout linearSoal;
     private int posisiPertanyaan;
+    private String nis;
+    private String idQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +64,11 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
         setContentView(R.layout.activity_soal);
 
         session = new SharedPrefLogin(this);
+        nis = session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER);
 
         txtNo = findViewById(R.id.txt_nomor);
         txtPertanyaan = findViewById(R.id.txt_pertanyaan);
+        txtNilai = findViewById(R.id.txt_nilai);
         radioGroup = findViewById(R.id.radioGroup);
         rbA = findViewById(R.id.rb_a);
         rbB = findViewById(R.id.rb_b);
@@ -68,9 +77,11 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
         rbE = findViewById(R.id.rb_e);
         btnSebelum = findViewById(R.id.btn_sebelum);
         btnLanjut = findViewById(R.id.btn_lanjut);
+        btnSelesai = findViewById(R.id.btn_selesai);
+        linearSoal = findViewById(R.id.linear_soal);
 
         if (getIntent().getExtras() != null) {
-            String idQuiz = getIntent().getExtras().getString("idquiz");
+            idQuiz = getIntent().getExtras().getString("idquiz");
             if (idQuiz != null) {
                 getAllSoalSiswa(idQuiz);
             } else {
@@ -84,19 +95,19 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
 
         btnSebelum.setOnClickListener(this);
         btnLanjut.setOnClickListener(this);
+        btnSelesai.setOnClickListener(this);
         radioGroup.setOnCheckedChangeListener(this);
     }
 
     private void getAllSoalSiswa(String idQuiz) {
         if (CommonHelper.checkInternet(this)) {
-            String nis = session.getUserDetails().get(SharedPrefLogin.KEY_ID_USER);
 
             loading = new ProgressDialog(this);
             loading.setCancelable(false);
             loading.setMessage("Tunggu sebentar..");
             loading.show();
 
-            Call<SoalSiswaResponse> call = service.getAllSoalSiswa(nis, idQuiz);
+            Call<SoalResponse> call = service.getAllSoal(nis, idQuiz);
             call.enqueue(this);
         } else {
             Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
@@ -104,8 +115,61 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
 
     }
 
+    private void createNilai() {
+        int jumlahSoal = soalItems.size();
+        int jawabanBenar = 0;
+
+        for (SoalItem soalItem : soalItems) {
+            if (soalItem.getJwbanPilihan().equals(soalItem.getJawaban())) jawabanBenar++;
+        }
+        String keterangan = jawabanBenar + " / " + jumlahSoal;
+        final double nilai = jawabanBenar / jumlahSoal * 100;
+        final int tmpJawabanBenar = jawabanBenar;
+
+        if (CommonHelper.checkInternet(this)) {
+            loading = new ProgressDialog(this);
+            loading.setCancelable(false);
+            loading.setMessage("Tunggu sebentar..");
+            loading.show();
+
+            Call<CreateNilaiResponse> call = service.createNilai(String.valueOf(nilai), idQuiz, nis, keterangan);
+            call.enqueue(new Callback<CreateNilaiResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<CreateNilaiResponse> call, @NonNull Response<CreateNilaiResponse> response) {
+                    loading.dismiss();
+                    if (response.body() != null) {
+                        if (response.body().getSuccess() == 1) {
+                            nilaiBerhasilDiInput(nilai, tmpJawabanBenar);
+                        } else {
+                            Toast.makeText(SoalActivity.this, "Respon -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(SoalActivity.this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<CreateNilaiResponse> call, @NonNull Throwable t) {
+                    loading.dismiss();
+                    t.printStackTrace();
+                    Toast.makeText(SoalActivity.this, "Error create nilai -> " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Cek koneksi internet anda", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void nilaiBerhasilDiInput(double nilai, int tmpJawabanBenar) {
+        linearSoal.setVisibility(View.GONE);
+        txtNilai.setVisibility(View.VISIBLE);
+        String strNilai = "Nilai anda : " + String.valueOf((int) nilai) + "\n" +
+                "Jawaban benar " + tmpJawabanBenar + " dari " + soalItems.size() + ".";
+        txtNilai.setText(strNilai);
+    }
+
     @Override
-    public void onResponse(@NonNull Call<SoalSiswaResponse> call, @NonNull Response<SoalSiswaResponse> response) {
+    public void onResponse(@NonNull Call<SoalResponse> call, @NonNull Response<SoalResponse> response) {
         loading.dismiss();
         if (response.body() != null) {
             if (response.body().getSuccess() == 1) {
@@ -123,6 +187,14 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
             Toast.makeText(this, "Server tidak memberikan respon", Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    @Override
+    public void onFailure(@NonNull Call<SoalResponse> call, @NonNull Throwable t) {
+        loading.dismiss();
+        t.printStackTrace();
+        Toast.makeText(this, "Error Ambil soal -> " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void showAllSoal(List<SoalItem> soalSoal) {
@@ -168,14 +240,18 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
 
         if (posisiPertanyaan == (soalItems.size() - 1)) btnLanjut.setVisibility(View.INVISIBLE);
         else btnLanjut.setVisibility(View.VISIBLE);
+
+        checkAllPertanyaan();
     }
 
-    @Override
-    public void onFailure(@NonNull Call<SoalSiswaResponse> call, @NonNull Throwable t) {
-        loading.dismiss();
-        t.printStackTrace();
-        Toast.makeText(this, "Error Ambil soal -> " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        finish();
+    private void checkAllPertanyaan() {
+        int pertanyaanTerjawab = 0;
+        for (SoalItem soalItem : soalItems) {
+            if (soalItem.getJwbanPilihan() != null) pertanyaanTerjawab++;
+        }
+        if (pertanyaanTerjawab == soalItems.size()) {
+            btnSelesai.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -189,6 +265,9 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
             case R.id.btn_lanjut:
                 posisiPertanyaan++;
                 switchPertanyaan(posisiPertanyaan);
+                break;
+            case R.id.btn_selesai:
+                createNilai();
                 break;
         }
     }
@@ -212,5 +291,6 @@ public class SoalActivity extends AppCompatActivity implements Callback<SoalSisw
                 soalItems.get(posisiPertanyaan).setJwbanPilihan("jwb_e");
                 break;
         }
+        checkAllPertanyaan();
     }
 }
