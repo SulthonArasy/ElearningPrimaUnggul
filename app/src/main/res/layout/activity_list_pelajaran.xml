@@ -76,6 +76,13 @@
             android:layout_height="wrap_content" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
+<!--    <Button
+        android:id="@+id/btn_tambah_siswa"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tambah_siswa" />-->
+
     <Button
         android:id="@+id/btn_buat_pelajaran"
         style="@style/Widget.AppCompat.Button.Colored"

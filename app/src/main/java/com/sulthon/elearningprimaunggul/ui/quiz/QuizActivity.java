@@ -22,6 +22,7 @@ import com.sulthon.elearningprimaunggul.data.api.soal.read.SoalResponse;
 import com.sulthon.elearningprimaunggul.data.sharedpref.SharedPrefLogin;
 import com.sulthon.elearningprimaunggul.service.APIRepository;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -114,8 +115,9 @@ public class QuizActivity extends AppCompatActivity implements Callback<SoalResp
     }
 
     private void createNilai() {
-        int jumlahSoal = soalItems.size();
+        double jumlahSoal = soalItems.size();
         int jawabanBenar = 0;
+
 
         for (SoalItem soalItem : soalItems) {
             if (soalItem.getJwbanPilihan().equals(soalItem.getJawaban())) jawabanBenar++;
@@ -123,6 +125,8 @@ public class QuizActivity extends AppCompatActivity implements Callback<SoalResp
         String keterangan = jawabanBenar + " / " + jumlahSoal;
         final double nilai = jawabanBenar / jumlahSoal * 100;
         final int tmpJawabanBenar = jawabanBenar;
+
+
 
         if (CommonHelper.checkInternet(this)) {
             loading = new ProgressDialog(this);
@@ -159,11 +163,15 @@ public class QuizActivity extends AppCompatActivity implements Callback<SoalResp
     }
 
     private void nilaiBerhasilDiInput(double nilai, int tmpJawabanBenar) {
+        String formatNilai = new DecimalFormat("##.##").format(nilai);
+
         linearSoal.setVisibility(View.GONE);
         txtNilai.setVisibility(View.VISIBLE);
-        String strNilai = "Nilai anda : " + String.valueOf((int) nilai) + "\n" +
+        String strNilai = "Nilai anda : " + formatNilai + "\n" +
                 "Jawaban benar " + tmpJawabanBenar + " dari " + soalItems.size() + ".";
         txtNilai.setText(strNilai);
+        //double i2=i/60000;
+        //tv.setText(new DecimalFormat("##.##").format(i2));
     }
 
     private void nilaiBerhasilDiInput(String nilai, String keterangan) {
